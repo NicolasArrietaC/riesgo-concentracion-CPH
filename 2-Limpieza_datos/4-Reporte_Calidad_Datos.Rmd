@@ -1,0 +1,225 @@
+---
+title: "Reporte de Calidad de Datos SECOP I"
+subtitle: "SIGMAP: Semillero de Investigación en Gestión, Mejora y Análisis de Procesos"
+author: "Nicolas Arrieta y Lizeth Jerez"
+date: "25/01/2021"
+output:
+  html_document: 
+    code_folding: hide
+    theme: flatly
+    toc: yes
+    toc_depth: 3
+editor_options: 
+  chunk_output_type: console
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+# Librerias y conjunto de datos
+
+Este documento requiere de algunas librerias del paquete Tidyverse, además de la librería Knitr para renderizar las tablas.
+
+Por otro lado, se cargan dos conjuntos de datos: (1) __secop_i_ips__ el cual presenta los contratos públicos depurados a aprtir de las tareas anteriores, y (2) __ind_calidad__ contiene los indicadores en la situación inicial.
+
+```{r setup, message=F, warning=F}
+# Librerias
+sapply(
+ c('dplyr', 'readr', 'stringr', 'knitr'), 
+ require, character.only = T
+)
+
+# Carga de datos
+direccion <- paste0('C:/Users/nico2/Proyectos/contratacion_publica/',
+                    'riesgo-concentracion-CPH/1-2-Datasets_complementarios/')
+# Conjunto de datos SECOP
+contratos <- read_csv(paste0(direccion, 'secop_i_ips.csv.gz'),
+                      locale = locale(encoding = 'UTF-8'))
+
+# reporte de indicadores de calidad
+ind_calidad <- read_csv(paste0(direccion, 'ind_calidad.csv'),
+                      locale = locale(encoding = 'UTF-8'))
+```
+
+# Generacion de indicadores
+
+Los indicadores fueron generados en varios grupos para presentar los enfoques realizados.
+
+## General
+
+Indicadores del estado general del conjunto de datos.
+
+```{r Indicadores general}
+# Cálculo ----
+# Cantidad de contratos
+n_cont <- nrow(contratos)
+# Valor de contratos
+v_cont <- round(sum(contratos$valor_total_con_adiciones) / 1e12, 2)
+# Valor promedio por contrato
+m_cont <- mean(contratos$valor_total_con_adiciones)
+# Desviacion estandar de los contratos
+sd_cont <- sd(contratos$valor_total_con_adiciones)
+# Coeficiente de variacion
+cv_cont <- sd_cont/m_cont * 100
+
+# Guardando la informacion dentro de una tabla
+temp <- tibble(
+ indicador = c('Cantidad de contratos', 'Valor total de contratos', 
+               'Media valor total', 'Desviación E. valor total',
+               'Coeficiente variación valor total'),
+ valor_final = c(n_cont, v_cont, m_cont, sd_cont, cv_cont)
+ )
+# Integración de la informacion ----
+ind_general <- ind_calidad %>% inner_join(temp, by = 'indicador') %>% 
+ mutate(cambio = round((valor_inicial - valor_final)/ valor_inicial * 100, 2))
+# Visualización
+kable(ind_general %>% select(-clase))
+```
+
+## Anomalías en valor de contratos
+
+Presentación de los indicadores propuestos para mejorar los problemas con respecto al valor de los contratos.
+
+```{r Indicadores valor}
+# Generacion de consultas de deteccion de anomalias ----
+temp <- contratos %>% 
+ mutate(racha_9ceros = (valor_total_con_adiciones %% 1e9 == 0 & 
+                         valor_total_con_adiciones > 0),
+     t_cuantia_proceso = cuantia_proceso / valor_total_con_adiciones * 100,
+     t_valor_adiciones = valor_adiciones / valor_total_con_adiciones * 100) %>%
+ arrange(desc(valor_total_con_adiciones)) %>% 
+ select(cuantia_proceso, cuantia_contrato, 
+        valor_adiciones, valor_total_con_adiciones,
+        t_cuantia_proceso, t_valor_adiciones, 
+        racha_9ceros)
+
+# Rachas
+# Numero de contratos que estan en racha de ceros
+n_9ceros <- sum(temp$racha_9ceros)
+# Valor de contratos que estan en racha de ceros
+v_9ceros <- round(sum(temp[temp$racha_9ceros, 
+                           'valor_total_con_adiciones'][[1]]) / 1e12, 2)
+
+# Tasa proceso/valor total
+pbajo <- 25; palto <- 250
+# Numero de contratos con tasa alta/baja
+n_tproc <- sum(temp$t_cuantia_proceso <= pbajo | 
+                temp$t_cuantia_proceso >= palto, na.rm = T)
+# Valor de contratos con tasa alta/baja
+v_tproc <- round(sum(temp[temp$t_cuantia_proceso <= pbajo | 
+      temp$t_cuantia_proceso >= palto, 'valor_total_con_adiciones'][[1]], 
+     na.rm = T)/1e12, 2)
+
+# Tasa adicion/valor total
+pbajo2 <- 3; palto2 <- 150
+# Numero de contratos con tasa alta/baja
+n_tadc <- sum(temp$t_valor_adiciones != 0 & 
+        (temp$t_valor_adiciones <= pbajo2 | temp$t_valor_adiciones >= palto2), 
+       na.rm = T)
+# Valor de contratos con tasa alta/baja
+v_tadc <- round(sum(temp[temp$t_valor_adiciones != 0 & 
+        (temp$t_valor_adiciones <= pbajo2 | temp$t_valor_adiciones >= palto2), 
+       'valor_total_con_adiciones'][[1]], na.rm = T) / 1e12, 2)
+
+# Valores extremos ----
+temp <- scale(contratos$valor_total_con_adiciones)
+atipicos <- sum(temp > 3 | temp < -3)
+
+# Guardando la informacion dentro de una tabla
+temp <- tibble(
+ indicador = c('Cantidad contratos en racha de 9 ceros', 
+               'Valor de contratos en racha de 9 ceros', 
+               'Cantidad contratos en tasa alta/baja en valor proceso/cuantia', 
+               'Valor de contratos en tasa alta/baja en valor proceso/cuantia',
+               'Cantidad contratos en tasa alta/baja en valor adicion/cuantia', 
+               'Valor de contratos en tasa alta/baja en valor adicion/cuantia',
+               'Valores atípicos'),
+ valor_final = c(n_9ceros, v_9ceros, n_tproc, 
+                   v_tproc, n_tadc, v_tadc, atipicos)
+)
+
+# Integración de la informacion ----
+ind_valor <- ind_calidad %>% inner_join(temp, by = 'indicador') %>% 
+ mutate(cambio = round((valor_inicial - valor_final)/ valor_inicial * 100, 2))
+# Visualización
+kable(ind_valor %>% select(-clase))
+```
+
+## Anomalías en identificación de los actores
+
+Indicadores propuesto para determinar la situación de calidad de los datos para la identificación de las entidades y contratistas.
+
+```{r Indicadores actores}
+# Entidades ----
+# Número de entidades
+n_entidades <- contratos %>% 
+  select(nit_entidad) %>% 
+  distinct() %>% count()
+
+n_entidades <- n_entidades[[1]]
+
+# Cantidad de entidades con nit no registrado
+nit_noreg <- contratos %>% group_by(nit_entidad) %>% 
+  summarise(nombres = n_distinct(nombre_entidad)) %>% 
+  filter(nombres > 1) %>% select(nombres)
+
+n_nit_na <- nrow(nit_noreg)
+
+# Valor de contratos con entidades con nit no registrado
+v_nit_na <- round(sum(contratos[contratos$nit_entidad == "No registra", 
+                      'valor_total_con_adiciones'][[1]]) / 1e12, 2)
+
+# Contratistas ----
+# Numero de contratistas
+n_contratistas <- contratos %>% 
+  select(id_contratista) %>% 
+  distinct() %>% count()
+
+n_contratistas <- n_contratistas[[1]]
+
+# Contratistas con diferente id
+temp <- contratos %>% group_by(razon_social_contratista) %>% 
+  summarise(nits = n_distinct(id_contratista)) %>% 
+  filter(nits > 1)
+
+n_varios_id <- nrow(temp)
+
+#Valor de contratos de contratistas con mas de un nit registrado
+v_varios_id <- round(sum(contratos[contratos$razon_social_contratista %in% 
+      temp$razon_social_contratista, 'valor_total_con_adiciones'])/1e12 , 2)
+
+# Guardando la informacion dentro de una tabla
+temp <- tibble(
+  indicador = c('Número de entidades',
+                'Cantidad contratos con nit de entidad no registrado',
+                'Valor de contratos con nit de entidad no registrado',
+                'Número de contratistas', 
+                'Número de contratistas con varios nits',
+            'Valor de contratos involucrados en contratistas con varios nits'),
+  valor_final = c(n_entidades, n_nit_na, v_nit_na, 
+                    n_contratistas, n_varios_id, v_varios_id)
+)
+
+# Integración de la informacion ----
+ind_actores <- ind_calidad %>% inner_join(temp, by = 'indicador') %>% 
+ mutate(cambio = round((valor_inicial - valor_final)/ valor_inicial * 100, 2))
+# Visualización
+kable(ind_actores %>% select(-clase))
+```
+
+# Resultado final
+
+A continuación se presenta el resultado de las tablas mencionadas anteriormente
+
+```{r}
+# Unión de las diferentes clases
+ind_calidad <- rbind(ind_general, ind_valor, ind_actores)
+# Escribir el reporte
+direccion <- paste0('C:/Users/nico2/Proyectos/contratacion_publica/',
+                    'riesgo-concentracion-CPH/1-2-Datasets/')
+write_csv(ind_calidad, paste0(direccion, 'ind_calidad_final.csv'))
+# Imprimir
+kable(ind_calidad)
+```
