@@ -31,6 +31,9 @@ sapply(
  require, character.only = T
 )
 
+# Ajustes definidos para el documento
+knitr::opts_chunk$set(message = F, warning = F, fig.align = "center")
+
 # Carga de datos
 direccion <- paste0('C:/Users/nico2/Proyectos/contratacion_publica/',
                     'riesgo-concentracion-CPH/1-2-Datasets_complementarios/')
@@ -218,7 +221,7 @@ A continuación se presenta el resultado de las tablas mencionadas anteriormente
 ind_calidad <- rbind(ind_general, ind_valor, ind_actores)
 # Escribir el reporte
 direccion <- paste0('C:/Users/nico2/Proyectos/contratacion_publica/',
-                    'riesgo-concentracion-CPH/1-2-Datasets/')
+                    'riesgo-concentracion-CPH/1-1-Datasets/')
 write_csv(ind_calidad, paste0(direccion, 'ind_calidad_final.csv'))
 # Imprimir
 kable(ind_calidad)

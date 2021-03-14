@@ -1,0 +1,102 @@
+﻿parents,info,ids
+,Desempeño fiscal,Desempeño fiscal
+,Inversión por sectores,Inversión por sectores
+,Operaciones efectivas de caja,Operaciones efectivas de caja
+,Recursos propios,Recursos propios
+,Resumen recursos,Resumen recursos
+,SGP_Distribución asignaciones SGP por sectores,SGP_Distribución asignaciones SGP por sectores
+,SGP_Distribución porcentual de asignaciones SGP por sectores,SGP_Distribución porcentual de asignaciones SGP por sectores
+,SGP_Porcentaje de ejecución presupuestal por sector,SGP_Porcentaje de ejecución presupuestal por sector
+,SGR - Asignación presupuestal,SGR_Asignación presupuestal
+,SGR - Cantidad y monto de proyectos de regalías,SGR_Cantidad y monto de proyectos de regalías
+,SGR - IGPR,SGR_IGPR
+,SGR - Saldos,SGR_Saldos
+Desempeño fiscal,Indicador de desempeño fiscal,Desempeño fiscal - Indicador de desempeño fiscal
+Desempeño fiscal - Indicador de desempeño fiscal,% de ingresos corrientes destinados a funcionamiento,Indicador de desempeño fiscal - % de ingresos corrientes destinados a funcionamiento
+Desempeño fiscal - Indicador de desempeño fiscal,% de ingresos corrientes que corresponden a recursos propios,Indicador de desempeño fiscal - % de ingresos corrientes que corresponden a recursos propios
+Desempeño fiscal - Indicador de desempeño fiscal,% de ingresos que corresponden a transferencias,Indicador de desempeño fiscal - % de ingresos que corresponden a transferencias
+Desempeño fiscal - Indicador de desempeño fiscal,% del gasto total destinado a inversión,Indicador de desempeño fiscal - % del gasto total destinado a inversión
+Desempeño fiscal - Indicador de desempeño fiscal,Capacidad de ahorro,Indicador de desempeño fiscal - Capacidad de ahorro
+Desempeño fiscal - Indicador de desempeño fiscal,Respaldo de la deuda,Indicador de desempeño fiscal - Respaldo de la deuda
+Inversión por sectores,Educación,Inversión por sectores - Educación
+Inversión por sectores,Salud,Inversión por sectores - Salud
+Operaciones efectivas de caja - Financiamiento,Credito interno y externo,Financiamiento - Credito interno y externo
+Operaciones efectivas de caja,Déficit o ahorro corriente,Operaciones efectivas de caja - Déficit o ahorro corriente
+Operaciones efectivas de caja,Déficit o superávit total,Operaciones efectivas de caja - Déficit o superávit total
+Operaciones efectivas de caja,Financiamiento,Operaciones efectivas de caja - Financiamiento
+Gastos totales - Gastos corrientes,Funcionamiento,Gastos corrientes - Funcionamiento
+Operaciones efectivas de caja - Gastos totales,Gastos corrientes,Gastos totales - Gastos corrientes
+Operaciones efectivas de caja - Gastos totales per cápita,Gastos corrientes per cápita,Gastos totales per cápita - Gastos corrientes per cápita
+Operaciones efectivas de caja - Gastos totales,Gastos de capital (Inversión),Gastos totales - Gastos de capital (Inversión)
+Gastos totales per cápita - Gastos corrientes per cápita,Gastos de funcionamiento per cápita,Gastos totales per cápita - Gastos de funcionamiento per cápita
+Operaciones efectivas de caja,Gastos totales,Operaciones efectivas de caja - Gastos totales
+Operaciones efectivas de caja,Gastos totales per cápita,Operaciones efectivas de caja - Gastos totales per cápita
+Operaciones efectivas de caja - Ingresos totales,Ingresos corrientes,Ingresos totales - Ingresos corrientes
+Operaciones efectivas de caja - Ingresos totales per cápita,Ingresos corrientes per cápita,Ingresos totales per cápita - Ingresos corrientes per cápita
+Operaciones efectivas de caja - Ingresos totales,Ingresos de capital,Ingresos totales - Ingresos de capital
+Operaciones efectivas de caja - Ingresos totales,Ingresos no tributarios,Ingresos corrientes - Ingresos no tributarios
+Ingresos totales per cápita - Ingresos corrientes per cápita,Ingresos no tributarios per cápita,Ingresos corrientes per cápita - Ingresos no tributarios per cápita
+Ingresos corrientes per cápita - Ingresos tributarios per cápita,Ingresos per cápita por impuesto a la Industria y al comercio,Ingresos tributarios per cápita - Ingresos per cápita por impuesto a la Industria y al comercio
+Ingresos corrientes per cápita - Ingresos tributarios per cápita,Ingresos per cápita por impuesto predial,Ingresos tributarios per cápita - Ingresos per cápita por impuesto predial
+Operaciones efectivas de caja,Ingresos totales,Operaciones efectivas de caja - Ingresos totales
+Operaciones efectivas de caja,Ingresos totales per cápita,Operaciones efectivas de caja - Ingresos totales per cápita
+Ingresos totales - Ingresos corrientes,Ingresos tributarios,Ingresos corrientes - Ingresos tributarios
+Ingresos totales per cápita - Ingresos corrientes per cápita,Ingresos tributarios per cápita,Ingresos corrientes per cápita - Ingresos tributarios per cápita
+Operaciones efectivas de caja - Gastos totales,Intereses de deuda pública,Gastos totales - Intereses de deuda pública
+Operaciones efectivas de caja - Financiamiento,Recursos del balance y variación de depósitos,Financiamiento - Recursos del balance y variación de depósitos
+Operaciones efectivas de caja,Regalías per cápita (Valor efectivamente girado al municipio),Operaciones efectivas de caja - Regalías per cápita (Valor efectivamente girado al municipio)
+Operaciones efectivas de caja - Ingresos totales,Transferencias de los ingresos corrientes,Ingresos totales - Transferencias de los ingresos corrientes
+Operaciones efectivas de caja - Ingresos totales per cápita,"Transferencias nacionales (SGP, etc.) per cápita","Ingresos totales per cápita - Transferencias nacionales (SGP, etc.) per cápita"
+Operaciones efectivas de caja - Ingresos totales per cápita,Transferencias per cápita de los ingresos corrientes,Ingresos totales per cápita - Transferencias per cápita de los ingresos corrientes
+Recursos propios,Ingresos corrientes per cápita,Recursos propios - Ingresos corrientes per cápita
+Recursos propios,Porcentaje de inversión con recursos propios,Recursos propios - Porcentaje de inversión con recursos propios
+Resumen recursos,Total de recaudo de ingresos corrientes per cápita,Resumen recursos - Total de recaudo de ingresos corrientes per cápita
+Resumen recursos,Total de recursos asignados per cápita - SGP,Resumen recursos - Total de recursos asignados per cápita - SGP
+Resumen recursos,Total de recursos asignados per cápita - SGR (Bienio),Resumen recursos - Total de recursos asignados per cápita - SGR (Bienio)
+SGP_Distribución asignaciones SGP por sectores,Total SGP_1,SGP_Distribución asignaciones SGP por sectores - Total SGP_1
+SGP_Distribución asignaciones SGP por sectores - Total SGP_1,Alimentación escolar,Total SGP_1 - Alimentación escolar
+SGP_Distribución asignaciones SGP por sectores - Total SGP_1,Educación,Total SGP_1 - Educación
+SGP_Distribución asignaciones SGP por sectores - Total SGP_1,Primera infancia,Total SGP_1 - Primera infancia
+SGP_Distribución asignaciones SGP por sectores - Total SGP_1,Propósito general,Total SGP_1 - Propósito general
+SGP_Distribución asignaciones SGP por sectores - Total SGP_1,Resguardos indígenas,Total SGP_1 - Resguardos indígenas
+SGP_Distribución asignaciones SGP por sectores - Total SGP_1,Ribereños,Total SGP_1 - Ribereños
+SGP_Distribución asignaciones SGP por sectores - Total SGP_1,Salud,Total SGP_1- Salud
+SGP_Distribución asignaciones SGP por sectores - Total SGP_1,Agua potable,Total SGP_1 - Agua potable
+SGP_Distribución porcentual de asignaciones SGP por sectores,Agua potable,SGP_Distribución porcentual de asignaciones SGP por sectores - Agua potable
+SGP_Distribución porcentual de asignaciones SGP por sectores,Alimentación escolar,SGP_Distribución porcentual de asignaciones SGP por sectores - Alimentación escolar
+SGP_Distribución porcentual de asignaciones SGP por sectores,Educación,SGP_Distribución porcentual de asignaciones SGP por sectores - Educación
+SGP_Distribución porcentual de asignaciones SGP por sectores,Fonpet,SGP_Distribución porcentual de asignaciones SGP por sectores - Fonpet
+SGP_Distribución porcentual de asignaciones SGP por sectores,Primera infancia,SGP_Distribución porcentual de asignaciones SGP por sectores - Primera infancia
+SGP_Distribución porcentual de asignaciones SGP por sectores,Propósito general,SGP_Distribución porcentual de asignaciones SGP por sectores - Propósito general
+SGP_Distribución porcentual de asignaciones SGP por sectores,Resguardos indígenas,SGP_Distribución porcentual de asignaciones SGP por sectores - Resguardos indígenas
+SGP_Distribución porcentual de asignaciones SGP por sectores,Ribereños,SGP_Distribución porcentual de asignaciones SGP por sectores - Ribereños
+SGP_Distribución porcentual de asignaciones SGP por sectores,Salud,SGP_Distribución porcentual de asignaciones SGP por sectores - Salud
+SGP_Porcentaje de ejecución presupuestal por sector,Total SGP,SGP_Porcentaje de ejecución presupuestal por sector - Total SGP
+SGP_Porcentaje de ejecución presupuestal por sector - Total SGP,Agua,Total SGP - Agua
+SGP_Porcentaje de ejecución presupuestal por sector - Total SGP,Alimentación escolar,Total SGP - Alimentación escolar
+SGP_Porcentaje de ejecución presupuestal por sector - Total SGP,Cultura,Total SGP - Cultura
+SGP_Porcentaje de ejecución presupuestal por sector - Total SGP,Deporte,Total SGP - Deporte
+SGP_Porcentaje de ejecución presupuestal por sector - Total SGP,Educación,Total SGP - Educación
+SGP_Porcentaje de ejecución presupuestal por sector - Total SGP,Libre destinación,Total SGP - Libre destinación
+SGP_Porcentaje de ejecución presupuestal por sector - Total SGP,Libre inversión,Total SGP - Libre inversión
+SGP_Porcentaje de ejecución presupuestal por sector - Total SGP,Salud,Total SGP - Salud
+SGR_Asignación presupuestal,Total de asignaciones SGR 2012,SGR_Asignación presupuestal - Total de asignaciones SGR 2012
+SGR_Asignación presupuestal,Total de asignaciones SGR 2013-2014,SGR_Asignación presupuestal - Total de asignaciones SGR 2013-2014
+SGR_Asignación presupuestal,Total de asignaciones SGR 2015-2016,SGR_Asignación presupuestal - Total de asignaciones SGR 2015-2016
+SGR_Asignación presupuestal,Total de asignaciones SGR 2017-2018,SGR_Asignación presupuestal - Total de asignaciones SGR 2017-2018
+SGR_Cantidad y monto de proyectos de regalías,Número total de proyectos,SGR_Cantidad y monto de proyectos de regalías - Número total de proyectos
+SGR_Cantidad y monto de proyectos de regalías - Número total de proyectos,Número de proyectos sin contratar,Número total de proyectos - Número de proyectos sin contratar
+SGR_Cantidad y monto de proyectos de regalías - Número total de proyectos,Número de proyectos terminados,Número total de proyectos - Número de proyectos terminados
+SGR_Cantidad y monto de proyectos de regalías - Número total de proyectos,Número de proyectos contratados,Número total de proyectos - Número de proyectos contratados
+SGR_Cantidad y monto de proyectos de regalías - Valor del número total de proyectos,Valor de los proyectos contratados,Valor del número total de proyectos - Valor de los proyectos contratados
+SGR_Cantidad y monto de proyectos de regalías - Valor del número total de proyectos,Valor de los proyectos sin contratar,Valor del número total de proyectos - Valor de los proyectos sin contratar
+SGR_Cantidad y monto de proyectos de regalías - Valor del número total de proyectos,Valor de los proyectos terminados,Valor del número total de proyectos - Valor de los proyectos terminados
+SGR_Cantidad y monto de proyectos de regalías,Valor del número total de proyectos,SGR_Cantidad y monto de proyectos de regalías - Valor del número total de proyectos
+SGR_IGPR,Índice de gestión de proyectos de regalías (IGPR),SGR_IGPR - Índice de gestión de proyectos de regalías (IGPR)
+SGR_IGPR - Índice de gestión de proyectos de regalías (IGPR),Componente - Eficiencia,SGR_IGPR - Componente - Eficiencia
+SGR_IGPR - Índice de gestión de proyectos de regalías (IGPR),Componente - Sin medidas del SMSCE,SGR_IGPR - Componente - Sin medidas del SMSCE
+SGR_IGPR - Índice de gestión de proyectos de regalías (IGPR),Componente - Transparencia,SGR_IGPR - Componente - Transparencia
+SGR_IGPR - Índice de gestión de proyectos de regalías (IGPR),Componente - Eficacia,SGR_IGPR - Componente - Eficacia
+SGR_Saldos,Saldo total,SGR_Saldos - Saldo total
+SGR_Saldos - Saldo total,Saldo directas,Saldo total - Saldo directas
+SGR_Saldos - Saldo total,Saldo específicas,Saldo total - Saldo específicas

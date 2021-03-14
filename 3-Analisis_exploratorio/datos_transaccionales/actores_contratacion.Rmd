@@ -1,0 +1,190 @@
+---
+title: "Análisis de Actores en la Contratación Pública hospitalaria"
+subtitle: 'SIGMAP: Semillero de Investigación en Gestión, Mejora y Análisis de Procesos'
+author: "Nicolas Arrieta y Lizeth Jerez"
+date: "27/01/2021"
+output:
+  html_document:
+    code_folding: hide
+    theme: flatly
+    toc: yes
+    toc_depth: 2
+  html_notebook:
+    toc: yes
+    toc_depth: '3'
+editor_options:
+ chunk_output_type: console
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+# Librerias y conjunto de datos
+
+```{r setup, message = F, warning = F}
+# Librerias
+sapply(
+ c('dplyr', 'readr', 'ggplot2', 'knitr', 'gridExtra', 'lubridate'), 
+ require, character.only = T
+)
+
+# Ajustes definidos para el documento
+knitr::opts_chunk$set(message = F, warning = F, fig.align = "center")
+
+# Carga de datos
+direccion <- paste0('C:/Users/nico2/Proyectos/contratacion_publica/',
+                    'riesgo-concentracion-CPH/1-2-Datasets_complementarios/')
+# Conjunto de datos SECOP
+contratos <- read_csv(paste0(direccion, 'secop_i_ips.csv.gz'),
+                      locale = locale(encoding = 'UTF-8'))
+```
+
+# Análisis Exploratorio
+
+## Participación de los actores
+
+### Distribución de los contratos por entidad y contratista
+
+*¿Cómo se distribuye los contratos por las entidades mediante la cantidad y el valor?*
+
+```{r dist. contratos entidad}
+# Consulta
+temp <- contratos %>% group_by(nit_entidad) %>% 
+ summarise(n = n(), v = sum(valor_total_con_adiciones) / 1e6)
+
+# Promedio
+median_n <- round(median(temp$n), 2)
+median_v <- round(median(temp$v), 2)
+```
+
+De acuerdo al histograma se encuentra una forma de campana al analizar la distribución con la adaptación logaritmica para ambos casos. La memdiana de la cantidad de contratos por entidad es de `r median_n`, mientras que la cuantía total es de `r median_v` millones.
+
+```{r grafica dist. entidad}
+# Graficas
+pt1 <- temp %>% ggplot(aes(n)) + 
+  geom_histogram(fill = '#264653') +
+  geom_vline(xintercept = median_n, size = 1, 
+             color = "#F4A261", linetype ="dashed") +
+  scale_x_continuous(breaks = c(1, 1e1, 1e2, 1e3, 1e4, 1e5), 
+       trans = 'log10') +
+  theme_classic() + 
+  labs(subtitle = 'Cantidad',
+       x = 'Número de contratos', y = 'Frecuencia', caption = '') +
+  theme(plot.subtitle= element_text(size=11, hjust=0.5))
+
+pt2 <- temp %>% ggplot(aes(v)) + geom_histogram(fill = '#2a9d8f') +
+  scale_x_continuous(breaks = c(1, 10, 100, 1e3, 1e4, 1e5, 1e6), 
+                     trans = 'log10') +
+  geom_vline(xintercept = median_v, size = 1, 
+             color = "#F4A261", linetype ="dashed") +
+ theme_classic() + 
+ labs(subtitle = 'Cuantía',
+      x = 'Valor de contratos (Mill.)', y = 'Frecuencia',
+      caption = 'Contratación pública hospitalaria en Colombia 2014-2019.') +
+  theme(plot.subtitle= element_text(size=11, hjust=0.5))
+
+grid.arrange(pt1, pt2, ncol=2, 
+             top = 'Distribución de contratos por entidad')
+```
+
+*¿Cómo se distribuye los contratos por los contratistas mediante la cantidad y el valor?*
+
+```{r dist. contratos contratista}
+# Consulta
+temp <- contratos %>% group_by(id_contratista) %>% 
+ summarise(n = n(), v = sum(valor_total_con_adiciones) / 1e6)
+
+# Promedio
+median_n <- round(median(temp$n), 2)
+median_v <- round(median(temp$v), 2)
+```
+
+De acuerdo al histograma se encuentra una forma exponencial al analizar la cantidad de contratos, mientras que en la cuantía existe una forma de campana con un sesgo negativo. La memdiana de la cantidad de contratos por contratista es de `r median_n`, mientras que la cuantía total es de `r median_v` millones.
+
+```{r}
+# Graficas
+pt1 <- temp %>% ggplot(aes(n)) + 
+  geom_histogram(fill = '#264653') +
+  geom_vline(xintercept = median_n, size = 1, 
+             color = "#F4A261", linetype ="dashed") +
+  scale_x_continuous(breaks = c(1, 2, 5, 10, 1e2, 1e3), 
+       trans = 'log10') +
+  theme_classic() + 
+  labs(subtitle = 'Cantidad',
+       x = 'Número de contratos', y = 'Frecuencia', caption = '') +
+  theme(plot.subtitle= element_text(size=11, hjust=0.5))
+
+pt2 <- temp %>% ggplot(aes(v)) + geom_histogram(fill = '#2a9d8f') +
+  scale_x_continuous(breaks = c(1, 10, 100, 1e3, 1e4, 1e5, 1e6), 
+                     trans = 'log10') +
+  geom_vline(xintercept = median_v, size = 1, 
+             color = "#F4A261", linetype ="dashed") +
+ theme_classic() + 
+ labs(subtitle = 'Cuantía',
+      x = 'Valor de contratos (Mill.)', y = 'Frecuencia',
+      caption = 'Contratación pública hospitalaria en Colombia 2014-2019.') +
+  theme(plot.subtitle= element_text(size=11, hjust=0.5))
+
+grid.arrange(pt1, pt2, ncol=2, 
+             top = 'Distribución de contratos por contratista')
+```
+
+*¿Cúal es el valor de los contratos de los contratistas que tienen entre 1 contrato hasta 5 contratos?*
+
+Los contratistas que presentan 5 o menos contratos firmados entre el periodo presentan un 30% del valor de los contratos de la contratación pública hospitalaria.
+
+```{r}
+v_tot <- sum(temp$v)
+
+temp <- temp %>% filter(n <= 5) %>% group_by(n) %>% 
+  summarise(N = n(), v = sum(v),
+            p = round(v / v_tot * 100, 2)) %>% 
+  rename(Num_contratos = n, Cantidad_contratistas = N,
+         Cuantia = v, Porcion = p)
+  
+kable(temp)
+```
+
+*¿Existe un cambio en el tiempo con respecto a la adquisición de contratos y el valor de estos?*
+
+Existe una periodicidad en el gasto pública, en el cual el trimestre que inicia el año es el más alto y el cuarto presenta una menor actividad.
+
+```{r}
+# Creación de trimestre
+temp <- contratos %>% 
+  mutate(trimestre = quarter(fecha_firma_contrato, with_year = T)) %>%
+  group_by(trimestre, nit_entidad) %>% 
+  summarise(n = n(),
+            v = sum(valor_total_con_adiciones) / 1e6) %>% 
+  ungroup(nit_entidad) %>% 
+  summarise(mean_n = mean(n), sd_n = sd(n),
+            mean_v = mean(v), sd_v = sd(v))
+
+kable(temp)
+```
+
+Entre los contratistas se presenta un comportamiento similar, aunque no tan pronunciado. 
+
+```{r}
+# Creación de trimestre
+temp <- contratos %>% 
+  mutate(trimestre = quarter(fecha_firma_contrato, with_year = T)) %>%
+  group_by(trimestre, id_contratista) %>% 
+  summarise(n = n(),
+            v = sum(valor_total_con_adiciones) / 1e6) %>% 
+  ungroup(id_contratista) %>% 
+  summarise(mean_n = mean(n), sd_n = sd(n),
+            mean_v = mean(v), sd_v = sd(v))
+
+kable(temp)
+```
+
+# Hallazgos y Conclusiones
+
+* Las entidades y contratistas presentan diferencias en la forma en que se distribuye los contratos. La causa principal es por la participación mayor de los contratitasta, lo que provoca que exista una mayor proporción de actores que apenas participan en uno o dos contratos. Es por esto que es de esperar que las entidades manejen un mayor nivel de contratos y la cuantia de estos.
+
+* El comportamiento de la contratación es estacional de acuerdo a que a inicios de cada año las entidades aumentan su nivel de compra, lo que genera el mismo efecto de los contratistas pero sin tanta variación.
+
+* De acuerdo a que los indicadores de concentración requieren que exista un historico de los actores que van a participar, es necesario establecer un limite de los contratistas y entidades que van a entrar en el estudio.

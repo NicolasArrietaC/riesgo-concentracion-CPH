@@ -151,5 +151,10 @@ contratos <- contratos %>%
   (!is.na(id) & (tipo_id_contratista == 'Nit de Persona Jurídica' & p == 50)),
          id_contratista, id_contratista)) %>% select(-c('id', 'p'))
 
-# 4. Escritura de datos ----
+# 6. Eliminación de variables ----
+# 6.1. REmover la variable del representante legal
+contratos$tipo_doc_representate_legal <- NULL
+contratos$id_representante_legal <- NULL
+
+# 5. Escritura de datos ----
 write_csv(contratos, paste0(direccion, 'secop_i_ips.csv.gz'))

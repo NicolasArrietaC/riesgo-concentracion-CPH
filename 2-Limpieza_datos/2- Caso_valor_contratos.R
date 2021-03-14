@@ -99,11 +99,11 @@ for (i in temp$ruta_web) {
  contratos[contratos$ruta_web == i, 'valor_total_con_adiciones'] <- 
   inicial + adicion
 }
-# 5. Eliminación de registros ----
+# 5. Eliminación de registros y variables ----
 # 5.1. Filtro de contratos con valor bajo (analisis 3.2.2)
 # Con este filtro se eliminan 100717 registros.
 contratos <- contratos %>% 
- filter(valor_total_con_adiciones > 5e5 | moneda != 'Pesos (COP)')
+ filter(valor_total_con_adiciones > 5e5 | son_cop != 1)
 
 # 6. Busqueda de contratos con posibles errores ----
 # 6.1. Mediante el uso de las consultas de deteccion de anomalias

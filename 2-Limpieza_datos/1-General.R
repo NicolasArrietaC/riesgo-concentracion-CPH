@@ -30,7 +30,21 @@ contratos <- read_delim(paste0(direccion, 'secop_i_ips_base.csv.gz'),
                          cuantia_contrato = col_double(),
                          valor_total_con_adiciones = col_double(),
                          moneda = col_character(),
-                         ruta_web = col_character()))
+                         ruta_web = col_character(),
+                         tipo_proceso = col_character(),
+                         regimen_contratacion = col_character(),
+                         tipo_contrato = col_character(),
+                         municipio_ejecucion = col_character(),
+                         nombre_grupo = col_character(),
+                         nombre_familia = col_character(),
+                         dpto_mcpo_contratista = col_character(),
+                         fecha_firma_contrato = col_character(),
+                         plazo_ejec_contrato = col_number(),
+                         rango_ejec_contrato = col_character(),
+                         tiempo_adiciones_dias = col_number(),
+                         tiempo_adiciones_meses = col_number(),
+                         municipio_entidad = col_character(),
+                         departamento_entidad = col_character()))
 
 # 3. Problemas de Calidad de datos ----
 # Indicadores generales
@@ -237,11 +251,118 @@ ind_calidad <- rbind(ind_calidad, temp)
 contratos$ruta_web <- str_remove_all(contratos$ruta_web, estandar_link)
 
 # 4.2. Remover departamento del nombre de la entidad
+contratos$nombre_entidad <- str_split(contratos$nombre_entidad, 
+                                      ' - ', simplify = T)[, 2]
+
+# 4.3. Estandarizacion del tipo de proceso
+# Codificacion
+# 1) Licitacion pública
+# 2) Selección abreviada
+# 3) Concurso de méritos
+# 4) Contratación directa
+# 5) Mínima cuantía
+# 6) Asociación público privada
+# 7) Régimen especial
+contratos <- contratos %>% 
+  mutate(tipo_proceso = str_to_lower(tipo_proceso),
+         tipo_proceso_cod = case_when(
+           str_detect(tipo_proceso, 
+                      pattern = "licitación públ|obra públ|subasta") ~ 1,
+           str_detect(tipo_proceso, "selección abreviada") ~ 2,
+           str_detect(tipo_proceso, "concurso de méri") ~ 3,
+           str_detect(tipo_proceso, "contratación dir|dos pa") ~ 4,
+           str_detect(tipo_proceso, "mínima cuantía") ~ 5,
+           str_detect(tipo_proceso, "público privada") ~ 6,
+           str_detect(tipo_proceso, "régimen especial") ~ 7))
+
+# Remover categoria original
+contratos$tipo_proceso <- NULL
+
+# 4.4. Estandarización del regimen de contratación
+# Estatuto general de contratación (1)
+# Regimen especial (2)
+contratos$es_regimen_especial <- if_else(contratos$regimen_contratacion == 
+                                           'Régimen Especial', 1, 0)
+
+# Remover la columna de regimen de contratacion
+contratos$regimen_contratacion <- NULL
+
+# 4.5. Estandarizacion del tipo de contrato
+# Codificación
+# 1) Agregación de demanda
+# 2) Prestación de Servicios
+# 3) Compraventa
+# 4) Concesión
+# 5) Suministro
+# 6) Obra
+# 7) Consultoría
+# 8) Otro tipo de contrato
+contratos <- contratos %>% 
+  mutate(tipo_contrato = str_to_lower(tipo_contrato),
+    tipo_contrato_cod = case_when(
+      str_detect(tipo_contrato, "marco|agregación de deman") ~ 1, 
+      str_detect(tipo_contrato, "prestación de servicios") ~ 2,
+      str_detect(tipo_contrato, "compraventa") ~ 3,
+      str_detect(tipo_contrato, "concesión") ~ 4,
+      str_detect(tipo_contrato, "suministro") ~ 5,
+      str_detect(tipo_contrato, "obra") ~ 6,
+      str_detect(tipo_contrato, "interventoría|consultoría") ~ 7,
+      str_detect(tipo_contrato, "otro|no definido") ~ 8))
+
+# Remover la columna de regimen de contratacion
+contratos$tipo_contrato <- NULL
+
+# 4.6. Tipo de moneda
+# Transformación a dummy
+contratos$son_cop <- if_else(contratos$moneda != 'Dólares (USD)', 1, 0)
+
+# Remover la categoria de memoria
+contratos$moneda <- NULL
+
+# 4.7. Estandatizacion de plazo de ejecucion
+contratos <- contratos %>% 
+  mutate(plazo_ejec_contrato = if_else(rango_ejec_contrato == 'M' & 
+                  rango_ejec_contrato < 120, 30, 1) * plazo_ejec_contrato)
+
+# Remover la variable rango_ejec
+contratos$rango_ejec_contrato <- NULL
+
+# 4.8. Estandariación de las adiciones de tiempo
+contratos$adiciones_dias <- contratos$tiempo_adiciones_dias + 
+  contratos$tiempo_adiciones_meses * 30
+
+# Remover las variables que mencionaban las adiciones
+contratos$tiempo_adiciones_dias <- NULL
+contratos$tiempo_adiciones_meses <- NULL
+
+# 4.9. Clasificación del nombre de grupo
+# 1) [A] Material Vivo Animal y Vegetal
+# 2) [B] Materias Primas 
+# 3) [C] Maquinaria, Herramientas, Equipo Industrial y Vehículos
+# 4) [D] Componentes y Suministros
+# 5) [E] Productos de Uso Final
+# 6) [F] Servicios
+# 7) [G] Terrenos, Edificios, Estructuras y vías
+contratos <- contratos %>% 
+  mutate(nombre_grupo = case_when(
+           str_detect(nombre_grupo, "[A]") ~ '1', 
+           str_detect(nombre_grupo, "[B]") ~ '2',
+           str_detect(nombre_grupo, "[C]") ~ '3',
+           str_detect(nombre_grupo, "[D]") ~ '4',
+           str_detect(nombre_grupo, "[E]") ~ '5',
+           str_detect(nombre_grupo, "[F]") ~ '6',
+           str_detect(nombre_grupo, "[G]") ~ '7'))
+
+# 4.10. Transformación de la variable fecha de firma
+contratos$fecha_firma_contrato <- ymd(contratos$fecha_firma_contrato)
 
 # 5. Eliminación de registros ----
 # 5.1. Remover duplicados
 # Se encontraron 652 registros duplicados
 contratos <- contratos %>% distinct()
+
+# 5.2. Remover contratos del año 2020
+contratos <- contratos %>% filter(year(fecha_firma_contrato) <= 2019)
 
 # 6. Escritura de datos ----
 write_csv(contratos, paste0(direccion, 'secop_i_ips.csv.gz'))
