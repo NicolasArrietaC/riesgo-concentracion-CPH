@@ -1,9 +1,9 @@
 indicador,clase,valor_inicial,valor_final,cambio
-Cantidad de contratos,General,1391442,1238323,11
+Cantidad de contratos,General,1391442,1238316,11
 Valor total de contratos,General,51.47,35.66,30.72
-Media valor total,General,36993293.4752322,28794046.8664363,22.16
-Desviación E. valor total,General,7773886800.131879,1347151156.5526369,82.67
-Coeficiente variación valor total,General,21014.313865665037,4678.5752721787085,77.74
+Media valor total,General,36993293.4752322,28794196.315367,22.16
+Desviación E. valor total,General,7773886800.131879,1347154962.6948009,82.67
+Coeficiente variación valor total,General,21014.313865665037,4678.564207662383,77.74
 Cantidad contratos en racha de 9 ceros,Posible error en valor,139,110,20.86
 Valor de contratos en racha de 9 ceros,Posible error en valor,12.32,1.45,88.23
 Cantidad contratos en tasa alta/baja en valor proceso/cuantia,Posible error en valor,31051,28040,9.7
@@ -14,6 +14,6 @@ Valores atípicos,Posible error en valor,94,631,-571.28
 Número de entidades,Errores en identificacion de actores,855,898,-5.03
 Cantidad contratos con nit de entidad no registrado,Errores en identificacion de actores,51,0,100
 Valor de contratos con nit de entidad no registrado,Errores en identificacion de actores,4.26,0,100
-Número de contratistas,Errores en identificacion de actores,291784,247819,15.07
-Número de contratistas con varios nits,Errores en identificacion de actores,46313,25015,45.99
-Valor de contratos involucrados en contratistas con varios nits,Errores en identificacion de actores,18.52,14.1,23.87
+Número de contratistas,Errores en identificacion de actores,291784,233587,19.95
+Número de contratistas con varios nits,Errores en identificacion de actores,46313,4528,90.22
+Valor de contratos involucrados en contratistas con varios nits,Errores en identificacion de actores,18.52,3.38,81.75

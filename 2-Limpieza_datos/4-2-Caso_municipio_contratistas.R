@@ -35,7 +35,7 @@ temp <- str_split(contratos$municipio_ejecucion, ';', simplify = T)
 temp <- as_tibble(temp, rownames = NULL) # Transformación en tibble
 # Agregación del id del contratista, valor con adiciones
 temp <- bind_cols(temp, contratos %>% 
-                    select(id_contratista, valor_total_con_adiciones) %>% 
+                    select(id_contratista_std, valor_total_con_adiciones) %>% 
                     rename(cuantia = valor_total_con_adiciones))
 
 # Agregacion de la llave
@@ -153,11 +153,11 @@ temp <- temp %>%
 
 # Porcion por cada uno de los municipios donde esta presente el contratista
 actividad_contratistas <- temp %>% 
-  group_by(id_contratista, cod_munp_ejecucion) %>% 
+  group_by(id_contratista_std, cod_munp_ejecucion) %>% 
   summarise(valor_total = sum(cuantia)) %>% 
   ungroup(cod_munp_ejecucion) %>% 
   mutate(p = valor_total / sum(valor_total)) %>% 
-  select(id_contratista, cod_munp_ejecucion, p)
+  select(id_contratista_std, cod_munp_ejecucion, p)
 
 # Remover temporal
 rm(temp)

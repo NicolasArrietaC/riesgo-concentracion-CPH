@@ -93,7 +93,7 @@ grid.arrange(pt1, pt2, ncol=2,
 
 ```{r dist. contratos contratista}
 # Consulta
-temp <- contratos %>% group_by(id_contratista) %>% 
+temp <- contratos %>% group_by(id_contratista_std) %>% 
  summarise(n = n(), v = sum(valor_total_con_adiciones) / 1e6)
 
 # Promedio
@@ -130,6 +130,72 @@ pt2 <- temp %>% ggplot(aes(v)) + geom_histogram(fill = '#2a9d8f') +
 grid.arrange(pt1, pt2, ncol=2, 
              top = 'Distribución de contratos por contratista')
 ```
+
+*¿Cómo se distribuyen las entidades y contratistas los contratos y con cuántos se relacionan?*
+
+Existe una relación directa muy fuerte del número de contratos con el número de contratistas con los que tienen relación una entidad. Por lo que se puede determinar un hecho relevante, ya que puede ser un factor para detectar outliers, sin embargo, para este caso no se presentan casos excepcionales.
+
+```{r}
+temp <- contratos %>% group_by(nit_entidad) %>% 
+ summarise(n = n(), v = sum(valor_total_con_adiciones) / 1e6,
+           n_contratistas = n_distinct(id_contratista_std),
+           sale = n <= 5 | n_contratistas <= 4,
+           col = if_else(sale, '#F4A261', '#264653'))
+
+ggplot(temp, aes(x = n, y = n_contratistas, color = sale)) + 
+  geom_point(alpha = 0.5, color = temp$col) +
+  scale_x_continuous(trans = 'log10') +
+  scale_y_continuous(trans = 'log10') + theme_light() + 
+ labs(title = 'Comportamiento de las entidades con relación a los contratistas',
+      x = 'Número de contratos', y = 'Número de contratistas',
+      caption = 'Contratación pública hospitalaria en Colombia 2014-2019')
+```
+
+```{r}
+temp <- temp %>% filter(n <= 5 | n_contratistas <= 4) %>% 
+  group_by(n, n_contratistas) %>% 
+  summarise(nn = n(), cuantia = sum(v),
+            pn = nn/nrow(temp) * 100, pv = cuantia/sum(temp$v)* 100)
+
+kable(temp)
+```
+
+De acuerdo al estudio no se tendran en cuenta entidades que tengan poca participación, es decir, que tengan menos de 6 contratos o una relación con menos de 4 contratistas. Por lo tanto, las entidades que se descartaron corresponden al `r round(sum(temp$pn), 2)`% del total de entidades y el valor de los contratos corresponde a un `r round(sum(temp$pv), 2)`% del valor de todos los contratos.
+
+Por parte de los contratistas, no se observa un patrón claro de la relación de los contratos y el número de entidades, como sucede en el anterior caso con las entidades. 
+
+
+por lo que se refuerza la idea de las diferencias de las características entre entidades y contratistas.
+
+```{r}
+temp <- contratos %>% group_by(id_contratista_std) %>% 
+ summarise(n = n(), v = sum(valor_total_con_adiciones) / 1e6,
+           n_entidades = n_distinct(nit_entidad),
+           sale = n <= 1 | n_entidades <= 1,
+           col = if_else(sale, '#F4A261', '#264653'))
+
+# Muestreo
+set.seed(73)
+sp <- sample(1:nrow(temp), round(nrow(temp)* .1, 0))
+
+ggplot(temp[sp,], aes(x = n, y = n_entidades, color = sale)) + 
+  geom_point(alpha = 0.5, color = temp[sp,]$col) +
+  scale_x_continuous(trans = 'log10') +
+  scale_y_continuous(trans = 'log10') + theme_light() + 
+ labs(title = 'Comportamiento de los contratistas con relación a las entidades',
+      x = 'Número de contratos', y = 'Número de entidades',
+      caption = 'Contratación pública hospitalaria en Colombia 2014-2019 (10%)')
+```
+
+```{r}
+temp2 <- temp %>% filter(n <= 1 | n_entidades <= 1) %>% 
+  group_by(n, n_entidades) %>% 
+  summarise(nn = n(), cuantia = sum(v),
+            pn = nn/nrow(temp) * 100, pv = cuantia/sum(temp$v)* 100)
+
+kable(temp2)
+```
+
 
 *¿Cúal es el valor de los contratos de los contratistas que tienen entre 1 contrato hasta 5 contratos?*
 
@@ -171,10 +237,10 @@ Entre los contratistas se presenta un comportamiento similar, aunque no tan pron
 # Creación de trimestre
 temp <- contratos %>% 
   mutate(trimestre = quarter(fecha_firma_contrato, with_year = T)) %>%
-  group_by(trimestre, id_contratista) %>% 
+  group_by(trimestre, id_contratista_std) %>% 
   summarise(n = n(),
             v = sum(valor_total_con_adiciones) / 1e6) %>% 
-  ungroup(id_contratista) %>% 
+  ungroup(id_contratista_std) %>% 
   summarise(mean_n = mean(n), sd_n = sd(n),
             mean_v = mean(v), sd_v = sd(v))
 

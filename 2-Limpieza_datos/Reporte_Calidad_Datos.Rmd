@@ -177,21 +177,21 @@ v_nit_na <- round(sum(contratos[contratos$nit_entidad == "No registra",
 # Contratistas ----
 # Numero de contratistas
 n_contratistas <- contratos %>% 
-  select(id_contratista) %>% 
+  select(id_contratista_std) %>% 
   distinct() %>% count()
 
 n_contratistas <- n_contratistas[[1]]
 
 # Contratistas con diferente id
-temp <- contratos %>% group_by(razon_social_contratista) %>% 
-  summarise(nits = n_distinct(id_contratista)) %>% 
+temp <- contratos %>% group_by(nom_contratista_std) %>% 
+  summarise(nits = n_distinct(id_contratista_std)) %>% 
   filter(nits > 1)
 
 n_varios_id <- nrow(temp)
 
 #Valor de contratos de contratistas con mas de un nit registrado
-v_varios_id <- round(sum(contratos[contratos$razon_social_contratista %in% 
-      temp$razon_social_contratista, 'valor_total_con_adiciones'])/1e12 , 2)
+v_varios_id <- round(sum(contratos[contratos$nom_contratista_std %in% 
+      temp$nom_contratista_std, 'valor_total_con_adiciones'])/1e12 , 2)
 
 # Guardando la informacion dentro de una tabla
 temp <- tibble(

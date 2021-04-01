@@ -17,19 +17,22 @@ editor_options:
 El conjunto de datos se obtuvo del [Departamento Nacional de pnaleación](https://terridata.dnp.gov.co/index-app.html#/descargas), en este caso se estudió la dimensión financiera.
 
 ```{r, message = FALSE}
-library(tidyverse)
-library(skimr)
-library(plotly)
-library(DT)
-library(reshape2)
+# Librerias
+sapply(
+ c('tidyverse', 'skimr', 'plotly', 'DT', 'reshape2'), 
+ require, character.only = T
+)
 
 knitr::opts_chunk$set(message = F, 
                       warning = F, 
                       fig.align = "center")
 
-ind_finan <- read_csv(
-  file = "Datasets/terridata_financiero.csv",
-  locale = locale(encoding = "UTF-8")) 
+# Carga de datos
+direccion <- paste0('C:/Users/nico2/Proyectos/contratacion_publica/',
+                    'riesgo-concentracion-CPH/1-2-Datasets_complementarios/')
+
+ind_finan <- read_csv(paste0(direccion, "terridata_finanzas_publicas.csv.gz"),
+                      locale = locale(encoding = "UTF-8")) 
 ```
 
 Ajuste de los nombres de las variables
@@ -45,15 +48,14 @@ names(ind_finan) <- c("codigo_departamento", "departamento",
 
 ## Visualización Categorias de indicadores
 
-La dimensión contiene 12 categorías que en conjunto presentan 76 indidores financieros
+La dimensión contiene 12 categorías que en conjunto presentan 76 indicadores financieros
 
 ```{r, message = F, fig.width = 8, fig.height = 8}
-categoria <- read_csv(
-  file = "ajuste_grafico_sunburn.csv",
-  locale = locale(encoding = "UTF-8")) 
+categoria <- read_csv(file = paste0(direccion, "ajuste_grafico_sunburn.csv"),
+                      locale = locale(encoding = "UTF-8")) 
 
 categoria <- categoria %>% 
-  mutate(label = paste0(str_sub(info, 1, 10), "..."))
+  mutate(label = str_trunc(info, 10))
 
 fig <- plot_ly(categoria,
                type = 'sunburst',
@@ -72,8 +74,14 @@ fig
 ## Limpieza de datos
 
 ```{r}
+
+# Remover variables redundantes
 ind_finan <- ind_finan %>% 
   select(-dimension, -dato_cualitativo)
+
+# Remover años que no se tendran en cuenta
+ind_finan <- ind_finan %>%
+  filter(anno >= 2014 & anno <= 2019)
 
 # Ajuste de las variables SGP para diferenciar los indicadores
 ind_finan <- ind_finan %>% 
@@ -89,9 +97,15 @@ ind_finan <- ind_finan %>%
   ))
 
 # Ajuste unidades
+# Ajuste de la variable de valor
+ind_finan$valor <- str_remove_all(ind_finan$valor, pattern = '\\.')# remover .
+ind_finan$valor <- str_replace(ind_finan$valor, pattern = ',', 
+                               replacement = '\\.') # Cambio de decimal
+ind_finan$valor <- as.numeric(ind_finan$valor) # Transformar a numérico
+
+
 ind_finan <- ind_finan %>% 
-  mutate(
-    valor = ifelse(und_medida == "Millones de pesos corrientes",
+  mutate(valor = ifelse(und_medida == "Millones de pesos corrientes",
                   valor*1e6, valor))
 ```
 
@@ -119,7 +133,6 @@ ind_finan_mup <- rbind(
 
 ## Operaciones efectivas de caja
 
-Solo están hasta el 2018.
 
 ### Nacional
 
@@ -147,7 +160,7 @@ El comportamiento es proporcional para cada rubro
 
 ```{r, fig.width = 7, fig.height = 6}
 grafica1 <- function(data, indicadores, titulo = "",
-                     nivel = "país"){
+                     nivel = "País"){
   
   data %>% filter(indicador %in% indicadores) %>% 
     filter(!is.na(valor)) %>%
@@ -156,7 +169,7 @@ grafica1 <- function(data, indicadores, titulo = "",
     ggplot(aes(x = anno, y = valor, fill = indicador)) +
   geom_area() +
   labs(title = titulo, subtitle = nivel,
-       x = "año", y = "Valor")
+       x = "año", y = "Valor") + theme_classic()
 }
 
 # Ingresos
@@ -164,7 +177,7 @@ ind <- c("Ingresos tributarios",
          "Ingresos no tributarios", "Ingresos de capital")
 
 grafica1(data = ind_finan_pais, indicadores = ind,
-         titulo = "Componente ingresos")
+         titulo = "Componente Ingresos")
 ```
 
 > Componente gastos
@@ -176,7 +189,7 @@ ind <- c("Gastos de capital (Inversión)",
          "Funcionamiento", "Intereses de deuda pública")
 
 grafica1(data = ind_finan_pais,indicadores = ind,
-         titulo = "Componente gastos")
+         titulo = "Componente Gastos")
 ```
 
 > Ingresos vs gastos
@@ -192,7 +205,8 @@ grafica2 <- function(indicadores, titulo = "", ley = TRUE){
   geom_line() + geom_point(size = 1) +
   labs(title = titulo, subtitle = "Pais",
        x = "año", y = "valor") +
-  scale_x_continuous(breaks = seq(2000, 2017, by = 2))
+  scale_x_continuous(breaks = seq(2014, 2019, by = 1)) +
+    theme_classic()
 
   if (!ley) {
     plot1 <- plot1 +
@@ -204,7 +218,7 @@ grafica2 <- function(indicadores, titulo = "", ley = TRUE){
 # Consulta
 ind <- c("Ingresos totales", "Gastos totales")
 
-grafica2(indicadores = ind, titulo = "Ingresos vs gastos")
+grafica2(indicadores = ind, titulo = "Ingresos vs Gastos")
 ```
 
 > Ingresos per capita
@@ -218,7 +232,9 @@ ind <- c("Ingresos per cápita por impuesto predial",
   "Transferencias per cápita de los ingresos corrientes")
 
 grafica1(data = ind_finan_pais, indicadores = ind, 
-         titulo = "Componente Ingresos per capita")
+         titulo = "Componente Ingresos per capita") + 
+  theme(legend.position ="right", 
+        legend.text = element_text(size = 6))
 ```
 
 > Ingresos vs gastos per capita
@@ -294,7 +310,8 @@ grafica3 <- function(data, indicadores, titulo = "" ,
   ggplot(aes(x = valor, fill = indicador)) +
   facet_wrap(vars(anno)) + geom_histogram() +
   labs(title = titulo,
-       subtitle = nivel, x = "Valor", y = "Probabilidad")
+       subtitle = nivel, x = "Valor", y = "Probabilidad") +
+    theme_classic()
 }
 
 #Consulta
@@ -303,7 +320,9 @@ ind <- c("Ingresos tributarios",
 
 grafica3(data = ind_finan_dpto, indicadores = ind, 
          titulo = "Componente ingresos", log = TRUE,
-         nivel = "Departamento")
+         nivel = "Departamento")  + 
+  theme(legend.position ="right", 
+        legend.text = element_text(size = 7))
 ```
 
 > Ingresos vs gastos
@@ -324,7 +343,8 @@ grafica4 <- function(data, indicadores, titulo = "" ,
   ggplot(aes(x = valor, color = indicador)) +
   facet_wrap(vars(anno)) + geom_density() +
   labs(title = titulo,
-       subtitle = nivel, x = "Valor", y = "Probabilidad")
+       subtitle = nivel, x = "Valor", y = "Probabilidad") +
+    theme_classic()
   
   if (!ley) {
     plot <- plot +
@@ -350,7 +370,6 @@ ind_finan_dpto %>%
   mutate(valor = valor/1e9) %>% 
   pivot_wider(names_from = "indicador", 
               values_from = "valor") %>%
-  filter(anno %in% c(2014:2019)) %>% 
   group_by(entidad) %>% 
   summarise(ingreso_prom = mean(`Ingresos totales`, 
                                 na.rm = TRUE),
@@ -391,7 +410,6 @@ ind_finan_dpto %>%
   mutate(valor = valor) %>% 
   pivot_wider(names_from = "indicador", 
               values_from = "valor") %>%
-  filter(anno %in% c(2014:2019)) %>% 
   group_by(entidad) %>% 
   summarise(ingreso_prom = mean(`Ingresos totales per cápita`, 
                                 na.rm = TRUE),
@@ -432,8 +450,7 @@ ind_finan_dpto %>%
   mutate(valor = valor) %>% 
   pivot_wider(names_from = "indicador", 
               values_from = "valor") %>%
-  rename(`Regalías per cápita` = ind) %>% 
-  filter(anno %in% c(2014:2019)) %>% 
+  rename(`Regalías per cápita` = ind) %>%
   group_by(entidad) %>% 
   summarise(regalias_cap_prom = mean(`Regalías per cápita`, 
                                 na.rm = TRUE),
@@ -507,7 +524,6 @@ ind_finan_mup %>%
   mutate(valor = valor/1e9) %>% 
   pivot_wider(names_from = "indicador", 
               values_from = "valor") %>%
-  filter(anno %in% c(2014:2019)) %>% 
   group_by(entidad) %>% 
   summarise(ingreso_prom = mean(`Ingresos totales`, 
                                 na.rm = TRUE),
@@ -548,7 +564,6 @@ ind_finan_mup %>%
   mutate(valor = valor) %>% 
   pivot_wider(names_from = "indicador", 
               values_from = "valor") %>%
-  filter(anno %in% c(2014:2019)) %>% 
   group_by(entidad) %>% 
   summarise(ingreso_prom = mean(`Ingresos totales per cápita`, 
                                 na.rm = TRUE),
@@ -590,7 +605,6 @@ ind_finan_mup %>%
   pivot_wider(names_from = "indicador", 
               values_from = "valor") %>%
   rename(`Regalías per cápita` = ind) %>% 
-  filter(anno %in% c(2014:2019)) %>% 
   group_by(entidad) %>% 
   summarise(regalias_cap_prom = mean(`Regalías per cápita`, 
                                 na.rm = TRUE),
@@ -628,9 +642,7 @@ correlacion <- function(data, indicadores){
     filter(indicador %in% indicadores) %>%
     select(codigo_entidad, entidad, indicador, 
            valor, anno, mes) %>% 
-    mutate(indicador = case_when(str_length(indicador) >= 30 ~ 
-                  paste0(str_sub(indicador, 1, 30), "..."),
-                  TRUE ~ indicador)) %>%  
+    mutate(indicador = str_trunc(indicador, 30)) %>%  
     pivot_wider(names_from = "indicador",
                 values_from = "valor") %>%
     select(-c(codigo_entidad, mes, anno, entidad)) %>%
@@ -707,7 +719,6 @@ ind_finan_dpto %>%
   pivot_wider(names_from = "indicador", 
               values_from = "valor") %>%
   rename(IDF = ind) %>% 
-  filter(anno %in% c(2014:2019)) %>% 
   group_by(entidad) %>% 
   summarise(IDF_prom = mean(IDF, na.rm = TRUE),
             IDF_sd = sd(IDF, na.rm = TRUE)) %>% 
@@ -748,7 +759,6 @@ ind_finan_mup %>%
   pivot_wider(names_from = "indicador", 
               values_from = "valor") %>%
   rename(IDF = ind) %>% 
-  filter(anno %in% c(2014:2019)) %>% 
   group_by(entidad) %>% 
   summarise(IDF_prom = mean(IDF, na.rm = TRUE),
             IDF_sd = sd(IDF, na.rm = TRUE)) %>% 
@@ -795,7 +805,6 @@ ind_finan_dpto %>%
   pivot_wider(names_from = "indicador", 
               values_from = "valor") %>%
   rename(IGPR = ind) %>% 
-  filter(anno %in% c(2014:2019)) %>% 
   group_by(entidad) %>% 
   summarise(IGPR_prom = mean(IGPR, na.rm = TRUE),
             IGPR_sd = sd(IGPR, na.rm = TRUE)) %>% 
@@ -838,7 +847,6 @@ ind_finan_mup %>%
   pivot_wider(names_from = "indicador", 
               values_from = "valor") %>%
   rename(IGPR = ind) %>% 
-  filter(anno %in% c(2014:2019)) %>% 
   group_by(entidad) %>% 
   summarise(IGPR_prom = mean(IGPR, na.rm = TRUE),
             IGPR_sd = sd(IGPR, na.rm = TRUE)) %>% 
@@ -867,9 +875,11 @@ ind <- c("Número de proyectos terminados",
          "Número de proyectos contratados",
          "Número de proyectos sin contratar")
 
-grafica1(data = ind_finan_dpto %>% filter(anno >= 2012),
+grafica1(data = ind_finan_dpto,
          indicadores = ind, nivel = "Departamental",
-         titulo = "Distribución de los proyectos por cantidad")
+         titulo = "Distribución de los proyectos por cantidad") + 
+  theme(legend.position = "right", 
+        legend.text = element_text(size = 6))
 ```
 
 > Distribución de los proyectos por valor
@@ -879,9 +889,11 @@ ind <- c("Valor de los proyectos terminados",
          "Valor de los proyectos contratados",
          "Valor de los proyectos sin contratar")
 
-grafica1(data = ind_finan_dpto %>% filter(anno >= 2012),
+grafica1(data = ind_finan_dpto,
          indicadores = ind, nivel = "Departamental",
-         titulo = "Distribución de los proyectos por valor")
+         titulo = "Distribución de los proyectos por valor") + 
+  theme(legend.position = "right", 
+        legend.text = element_text(size = 6))
 ```
 
 ### Municipal
@@ -901,9 +913,11 @@ ind <- c("Número de proyectos terminados",
          "Número de proyectos contratados",
          "Número de proyectos sin contratar")
 
-grafica1(data = ind_finan_mup %>% filter(anno >= 2012),
+grafica1(data = ind_finan_mup,
          indicadores = ind, nivel = "Municipal",
-         titulo = "Distribución de los proyectos por cantidad")
+         titulo = "Distribución de los proyectos por cantidad") + 
+  theme(legend.position = "right", 
+        legend.text = element_text(size = 6))
 ```
 
 > Distribución de los proyectos por valor
@@ -913,9 +927,11 @@ ind <- c("Valor de los proyectos terminados",
          "Valor de los proyectos contratados",
          "Valor de los proyectos sin contratar")
 
-grafica1(data = ind_finan_mup %>% filter(anno >= 2012),
+grafica1(data = ind_finan_mup,
          indicadores = ind, nivel = "Municipal",
-         titulo = "Distribución de los proyectos por valor")
+         titulo = "Distribución de los proyectos por valor") + 
+  theme(legend.position = "right", 
+        legend.text = element_text(size = 6))
 ```
 
 ## SGR - Saldos
@@ -1008,6 +1024,12 @@ grafica1(data = ind_finan_mup,
          titulo = "Distribución asignaciones por sector")
 ```
 
+En estas categorías hay mucha correlación de las variables más representativas, por lo que es necesario escoger una que sea la más representativa.
+
+```{r}
+correlacion(data = ind_finan_mup, indicadores = ind)
+```
+
 ## SGP - Distribución porcentual de asignaciones SGP por sectores
 
 ### Departamental
@@ -1058,6 +1080,10 @@ grafica1(data = ind_finan_mup,
          titulo = "Distribución asignaciones por sector")
 ```
 
+```{r}
+correlacion(data = ind_finan_mup, indicadores = ind)
+```
+
 ## SGP - Porcentaje de ejecución presupuestal por sector
 
 ### Departamental
@@ -1080,57 +1106,6 @@ resumen_est(data = ind_finan_mup,
                  " ejecución presupuestal por sector"))
 ```
 
-## Inversión por sectores
-
-### Departamental
-
-> Resumen estadístico
-
-```{r}
-resumen_est(data = ind_finan_dpto,
-            sub_categoria = "Inversión por sectores")
-```
-
-> Distribución por año
-
-```{r, fig.width = 7, fig.height = 6}
-ind <- c("Inversión - Educación", "Inversión - Salud")
-
-ind_finan_dpto %>% filter(indicador %in% ind) %>% 
-  ggplot(aes(x = log(valor, base = 10), y = indicador,
-             fill = indicador)) +
-  facet_wrap(vars(anno)) + geom_boxplot() +
-  theme(legend.position = "none") + 
-  labs(title = "Distribución por año", 
-       subtitle = "Departamental", x = "log(Valor)",
-       y = "")
-```
-
-
-### Municipal
-
-> Resumen estadístico
-
-```{r}
-resumen_est(data = ind_finan_mup,
-            sub_categoria = "Inversión por sectores")
-```
-
-> Distribución por año
-
-```{r, fig.width = 7, fig.height = 6}
-ind <- c("Inversión - Educación", "Inversión - Salud")
-
-ind_finan_mup %>% filter(indicador %in% ind) %>% 
-  ggplot(aes(x = log(valor, base = 10), y = indicador,
-             fill = indicador)) +
-  facet_wrap(vars(anno)) + geom_boxplot() +
-  theme(legend.position = "none") + 
-  labs(title = "Distribución por año", 
-       subtitle = "Municipal", x = "log(Valor)",
-       y = "")
-```
-
 ## Recursos propios
 
 ### Departamental
@@ -1151,211 +1126,29 @@ resumen_est(data = ind_finan_mup,
             sub_categoria = "Recursos propios")
 ```
 
-## Resumen recursos
-
-### Departamental
-
-> Resumen estadístico
-
-```{r}
-resumen_est(data = ind_finan_dpto,
-            sub_categoria = "Resumen recursos")
-```
-
-### Municipal
-
-> Resumen estadístico
-
-```{r}
-resumen_est(data = ind_finan_mup,
-            sub_categoria = "Resumen recursos")
-```
-
 ## Correlación entre las variables seleccionadas
 
 ```{r, fig.width = 9, fig.height = 8}
-ind <- c("Ingresos totales",
-         "Financiamiento", paste0("Regalías per cápita",
-          " (Valor efectivamente girado al municipio)"), 
+ind <- c("Ingresos totales", "Financiamiento", 
+         paste0("Regalías per cápita",
+                " (Valor efectivamente girado al municipio)"), 
          "Indicador de desempeño fiscal",
          "Índice de gestión de proyectos de regalías (IGPR)",
-         "ppa - Salud", "ppa - Propósito general", 
-         "ppa - Educación" ,"ppe - Total SGP" ,
+         "ppa - Salud", "ppa - Educación",
          "Número total de proyectos", 
          "Valor del número total de proyectos")
 
 correlacion(data = ind_finan_mup, indicadores = ind)
 ```
 
-Seleccion de indicadores
-
-```{r eval=FALSE, include=FALSE}
-ind_selec_mun <- ind_finan_mup %>% 
-  filter(indicador %in% ind) %>% 
-  select(codigo_entidad, entidad, indicador, 
-          valor, anno, mes) %>%
-  pivot_wider(names_from = "indicador",
-              values_from = "valor") %>% 
-  filter(anno %in% c(2014:2019)) %>% 
-  group_by(codigo_entidad, anno) %>% 
-  summarise(ingresos_totales = sum(`Ingresos totales`, na.rm = TRUE),
-            financiamiento = sum(Financiamiento, na.rm = TRUE),
-            regalias_per_capital = sum(`Regalías per cápita (Valor efectivamente girado al municipio)`, na.rm = TRUE),
-            numero_proyectos = sum(`Número total de proyectos`, 
-                                   na.rm = TRUE),
-            valor_proyectos = sum(`Valor del número total de proyectos`, na.rm = TRUE),
-            indice_gestion_proyectos = mean(`Índice de gestión de proyectos de regalías (IGPR)`, na.rm = TRUE),
-            total_sgp_ppe = mean(`ppe - Total SGP`, na.rm = TRUE),
-            indice_desempenno_fiscal = mean(`Indicador de desempeño fiscal`, na.rm = TRUE),
-            prop_general_ppa = mean(`ppa - Propósito general`, 
-                                    na.rm = TRUE),
-            prop_educacion = mean(`ppa - Educación`, na.rm = TRUE),
-            prop_salud = mean(`ppa - Salud`, na.rm = TRUE)) 
-  
-  
-ind_selec_resm <- ind_selec %>% group_by(codigo_entidad) %>% 
-  summarise(inf_ingre_m = mean(ingresos_totales, na.rm = TRUE),
-            inf_ingre_sd = sd(ingresos_totales, na.rm = TRUE),
-            inf_finan_m = mean(financiamiento, na.rm = TRUE),
-            inf_finan_sd = sd(financiamiento, na.rm = TRUE),
-            inf_regal_m = mean(regalias_per_capital, na.rm = TRUE),
-            inf_regal_sd = sd(regalias_per_capital, na.rm = TRUE),
-            inf_nproy_m = mean(numero_proyectos, na.rm = TRUE),
-            inf_nproy_sd = sd(numero_proyectos, na.rm = TRUE),
-            inf_vproy_m = mean(valor_proyectos, na.rm = TRUE),
-            inf_vproy_sd = sd(valor_proyectos, na.rm = TRUE),
-            inf_igp_m = mean(indice_gestion_proyectos, na.rm = TRUE),
-            inf_igp_sd = sd(indice_gestion_proyectos, na.rm = TRUE),
-            inf_tsgp_ppe_m = mean(total_sgp_ppe, na.rm = TRUE),
-            inf_idf_m = mean(indice_desempenno_fiscal, na.rm = TRUE),
-            inf_idf_sd = sd(indice_desempenno_fiscal, na.rm = TRUE),
-            inf_pg_ppa_m = mean(prop_general_ppa, na.rm = TRUE),
-            inf_pg_ppa_sd = sd(prop_general_ppa, na.rm = TRUE),
-            inf_e_ppa_m = mean(prop_educacion, na.rm = TRUE),
-            inf_e_ppa_sd = sd(prop_educacion, na.rm = TRUE),
-            inf_s_ppa_m = mean(prop_salud, na.rm = TRUE),
-            inf_s_ppa_sd = sd(prop_salud, na.rm = TRUE))
-
-write_csv(x = ind_selec_resm, path = "Datasets/ind_selec_resumen.csv")
-```
-
-Seleccion de indicadores para Yilber
-
-Municipio
-
-```{r eval=FALSE, include=FALSE}
-ind_selec_mun <- ind_finan_mup %>% 
-  filter(indicador %in% ind) %>% 
-  select(codigo_departamento, codigo_entidad, entidad, indicador, 
-          valor, anno, mes) %>%
-  pivot_wider(names_from = "indicador",
-              values_from = "valor") %>% 
-  filter(anno %in% c(2014:2019)) %>% 
-  group_by(codigo_departamento, codigo_entidad, anno) %>% 
-  summarise(ingresos_totales = sum(`Ingresos totales`, na.rm = TRUE),
-            financiamiento = sum(Financiamiento, na.rm = TRUE),
-            regalias_per_capital = sum(`Regalías per cápita (Valor efectivamente girado al municipio)`, na.rm = TRUE),
-            numero_proyectos = sum(`Número total de proyectos`, 
-                                   na.rm = TRUE),
-            valor_proyectos = sum(`Valor del número total de proyectos`, na.rm = TRUE),
-            indice_gestion_proyectos = mean(`Índice de gestión de proyectos de regalías (IGPR)`, na.rm = TRUE),
-            total_sgp_ppe = mean(`ppe - Total SGP`, na.rm = TRUE),
-            indice_desempenno_fiscal = mean(`Indicador de desempeño fiscal`, na.rm = TRUE),
-            prop_general_ppa = mean(`ppa - Propósito general`, 
-                                    na.rm = TRUE),
-            prop_educacion = mean(`ppa - Educación`, na.rm = TRUE),
-            prop_salud = mean(`ppa - Salud`, na.rm = TRUE)) 
-  
-  
-ind_selec_mun_resm <- ind_selec_mun %>% 
-  group_by(codigo_departamento, codigo_entidad) %>% 
-  summarise(inf_ingre_mun_m = mean(ingresos_totales, na.rm = TRUE),
-            inf_ingre_mun_sd = sd(ingresos_totales, na.rm = TRUE),
-            inf_finan_mun_m = mean(financiamiento, na.rm = TRUE),
-            inf_finan_mun_sd = sd(financiamiento, na.rm = TRUE),
-            inf_regal_mun_m = mean(regalias_per_capital, na.rm = TRUE),
-            inf_regal_mun_sd = sd(regalias_per_capital, na.rm = TRUE),
-            inf_nproy_mun_m = mean(numero_proyectos, na.rm = TRUE),
-            inf_nproy_mun_sd = sd(numero_proyectos, na.rm = TRUE),
-            inf_vproy_mun_m = mean(valor_proyectos, na.rm = TRUE),
-            inf_vproy_mun_sd = sd(valor_proyectos, na.rm = TRUE),
-            inf_igp_mun_m = mean(indice_gestion_proyectos, na.rm = TRUE),
-            inf_igp_mun_sd = sd(indice_gestion_proyectos, na.rm = TRUE),
-            inf_tsgp_ppe_mun_m = mean(total_sgp_ppe, na.rm = TRUE),
-            inf_idf_mun_m = mean(indice_desempenno_fiscal, na.rm = TRUE),
-            inf_idf_mun_sd = sd(indice_desempenno_fiscal, na.rm = TRUE),
-            inf_pg_ppa_mun_m = mean(prop_general_ppa, na.rm = TRUE),
-            inf_pg_ppa_mun_sd = sd(prop_general_ppa, na.rm = TRUE),
-            inf_e_ppa_mun_m = mean(prop_educacion, na.rm = TRUE),
-            inf_e_ppa_mun_sd = sd(prop_educacion, na.rm = TRUE),
-            inf_s_ppa_mun_m = mean(prop_salud, na.rm = TRUE),
-            inf_s_ppa_mun_sd = sd(prop_salud, na.rm = TRUE))
-
-write_csv(x = ind_selec_mun_resm %>% ungroup() %>% 
-            select(-codigo_departamento), 
-          path = "Datasets/ind_selec_mun_resumen.csv")
-```
-
-Departamento
-
-```{r eval=FALSE, include=FALSE}
-ind_selec_dep <- ind_finan_mup %>% 
-  filter(indicador %in% ind) %>% 
-  select(codigo_departamento, departamento, indicador, 
-          codigo_entidad, entidad, valor, anno, mes) %>%
-  pivot_wider(names_from = "indicador",
-              values_from = "valor") %>% 
-  filter(anno %in% c(2014:2019)) %>% 
-  group_by(codigo_departamento, anno) %>% 
-  summarise(ingresos_totales = sum(`Ingresos totales`, na.rm = TRUE),
-            financiamiento = sum(Financiamiento, na.rm = TRUE),
-            regalias_per_capital = sum(`Regalías per cápita (Valor efectivamente girado al municipio)`, na.rm = TRUE),
-            numero_proyectos = sum(`Número total de proyectos`, 
-                                   na.rm = TRUE),
-            valor_proyectos = sum(`Valor del número total de proyectos`, na.rm = TRUE),
-            indice_gestion_proyectos = mean(`Índice de gestión de proyectos de regalías (IGPR)`, na.rm = TRUE),
-            total_sgp_ppe = mean(`ppe - Total SGP`, na.rm = TRUE),
-            indice_desempenno_fiscal = mean(`Indicador de desempeño fiscal`, na.rm = TRUE),
-            prop_general_ppa = mean(`ppa - Propósito general`, 
-                                    na.rm = TRUE),
-            prop_educacion = mean(`ppa - Educación`, na.rm = TRUE),
-            prop_salud = mean(`ppa - Salud`, na.rm = TRUE)) 
-  
-  
-ind_selec_dep_resm <- ind_selec_dep %>% group_by(codigo_departamento) %>% 
-  summarise(inf_ingre_dto_m = mean(ingresos_totales, na.rm = TRUE),
-            inf_ingre_dto_sd = sd(ingresos_totales, na.rm = TRUE),
-            inf_finan_dto_m = mean(financiamiento, na.rm = TRUE),
-            inf_finan_dto_sd = sd(financiamiento, na.rm = TRUE),
-            inf_regal_dto_m = mean(regalias_per_capital, na.rm = TRUE),
-            inf_regal_dto_sd = sd(regalias_per_capital, na.rm = TRUE),
-            inf_nproy_dto_m = mean(numero_proyectos, na.rm = TRUE),
-            inf_nproy_dto_sd = sd(numero_proyectos, na.rm = TRUE),
-            inf_vproy_dto_m = mean(valor_proyectos, na.rm = TRUE),
-            inf_vproy_dto_sd = sd(valor_proyectos, na.rm = TRUE),
-            inf_igp_dto_m = mean(indice_gestion_proyectos, na.rm = TRUE),
-            inf_igp_dto_sd = sd(indice_gestion_proyectos, na.rm = TRUE),
-            inf_tsgp_ppe_dto_m = mean(total_sgp_ppe, na.rm = TRUE),
-            inf_idf_dto_m = mean(indice_desempenno_fiscal, na.rm = TRUE),
-            inf_idf_dto_sd = sd(indice_desempenno_fiscal, na.rm = TRUE),
-            inf_pg_ppa_dto_m = mean(prop_general_ppa, na.rm = TRUE),
-            inf_pg_ppa_dto_sd = sd(prop_general_ppa, na.rm = TRUE),
-            inf_e_ppa_dto_m = mean(prop_educacion, na.rm = TRUE),
-            inf_e_ppa_dto_sd = sd(prop_educacion, na.rm = TRUE),
-            inf_s_ppa_dto_m = mean(prop_salud, na.rm = TRUE),
-            inf_s_ppa_dto_sd = sd(prop_salud, na.rm = TRUE))
-
-write_csv(x = ind_selec_dep_resm, 
-          path = "Datasets/ind_selec_dep_resumen.csv")
-```
-
-Union total
+# Selección de indicadores
 
 ```{r}
-ind_selec_res <- merge(x = ind_selec_mun_resm, y = ind_selec_dep_resm,
-                       by = "codigo_departamento", all.x = T)
+ind_finan_mup <- ind_finan_mup %>% 
+ filter(indicador %in% ind) %>% 
+ select(codigo_entidad, indicador, 
+        valor, anno, mes)
 
-write_csv(x = ind_selec_res, 
-          path = "Datasets/ind_selec_res.csv")
+write_csv(x = ind_finan_mup, 
+          path = paste0(direccion, "terr_indsel_financiero.csv"))
 ```
-
