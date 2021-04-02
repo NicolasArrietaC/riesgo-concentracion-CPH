@@ -1,0 +1,218 @@
+---
+title: "Análisis de indicadores de riesgo de corrupción en los actires de contratación pública hospitalaria"
+subtitle: 'SIGMAP: Semillero de Investigación en Gestión, Mejora y Análisis de Procesos'
+author: "Nicolas Arrieta y Lizeth Jerez"
+date: "16/02/2021"
+output:
+  html_document:
+    code_folding: hide
+    theme: flatly
+    toc: yes
+    toc_depth: 2
+  html_notebook:
+    toc: yes
+    toc_depth: '3'
+editor_options:
+ chunk_output_type: console
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+# Librerias y conjunto de datos
+
+```{r setup, message = F, warning = F}
+# Librerias
+sapply(
+ c('dplyr', 'readr', 'ggplot2', 'gridExtra', 'lubridate',
+   'knitr', 'skimr', 'reshape2', 'GGally'), 
+ require, character.only = T
+)
+
+# Ajustes definidos para el documento
+knitr::opts_chunk$set(message = F, warning = F, fig.align = "center")
+
+# Carga de datos
+direccion <- paste0('C:/Users/nico2/Proyectos/contratacion_publica/',
+                    'riesgo-concentracion-CPH/1-1-Datasets/')
+# Indocadores contratistas
+ind_cont <- read_csv(paste0(direccion, 'contratistas/1A_contratistas.csv'),
+                      locale = locale(encoding = 'UTF-8'))
+# Indocadores entidades
+ind_ent <- read_csv(paste0(direccion, 'entidades/1A_entidades.csv'),
+                      locale = locale(encoding = 'UTF-8'))
+```
+
+# Análisis exploratorio
+
+## Resumen estadístico
+
+Por el momento todo normal
+
+```{r}
+skim(ind_ent)
+```
+
+```{r}
+skim(ind_cont)
+```
+
+## Análisis de correlación
+
+A continuación, se presenta la correlación de las variables transaccionales para entidades y contratistas. En los contratistas se observa una correlación leve entre la mayoría de varaibles, lo que representa una situación favorable, debido a que no es necesario descartar variables y puede mostrarnos un indicio de la inferencia para la concentración.
+
+Sin embargo, cabe resaltar dos situaciones. En primera instancia, las variables del indice HHI y el IC4K presentan una correlación alta, debido a que entre estas 4 varaibles puede estar representada el indicador de concentración, es decir, el de target es necesario aclarar la situación. Por otro lado, hay una correlación en los indicadores que presentan modificaciones en los contratos, sin embargo, el hecho de que la mayoría de valores están alredor del cero, puede generarse este efecto, para este caso es necesario revisar variables categoricas.
+
+```{r}
+correlacion <- function(data, titulo){
+
+   data <- data %>%
+    cor(use = "complete.obs")
+   
+   data <- round(x = data, digits = 2)
+   
+   data <- melt(data)
+   
+   ggplot(data = data, aes(x = Var1, y = Var2, 
+                           fill = value)) + geom_tile() +
+ theme(axis.text.x = element_text(angle = 45, vjust = 1, 
+    size = 7, hjust = 1),
+    axis.text.y = element_text(size = 7)) +
+ scale_fill_gradient2(low = "green", 
+                      high = "red", mid = "yellow", 
+   midpoint = 0, limit = c(-1,1), space = "Lab", 
+   name ="Correlación\nPearson") +
+     labs(x = "", y = "", title = titulo,
+          caption = 'Contratación pública hospitalaria en Colombia 2014-2019.')
+}
+
+correlacion(ind_ent %>% select(-nit_entidad),
+            titulo = 'Correlación variables transaccionales para entidades')
+```
+
+Entre las varaibles que representan la concentración, es decir, los indices HHI y el IC4K es necesario definir como van a estar representadas. A continuación, se presenta una matriz de gráficos de puntos para cada una de las variables, con adición a una variable que promedia todos los valores llamada 'IRCC'. De este gráfico se puede inferir varias cosas:
+
+* La existencia de la correlación es fuerte entre las variables de igual dimensión, es decir, por número y valor. Por lo tanto, puede que también sea una opción para tomarlo como variable target.
+
+* La variable IRCC tiene una gran representación de las 4 varaibles, debido a que la que presenta menor correlación tiene un puntaje de 0.58, lo que se puede considerar como una dependecia moderada. Por otro lado, la variable de __pval_ic4k__ tiene una correlación del 0.944, lo que se puede entender que con solo esta variable se puede componer el indice global. Sin embargo, se partira de este promedio gracias a su buena convergencia.
+
+```{r}
+ind_concentracion <- c('num_HHI', 'val_HHI', 'pnum_ic4k', 'pval_ic4k')
+
+ggpairs(ind_ent %>% 
+          mutate(IRCC = rowMeans(ind_ent[, ind_concentracion])) %>% 
+          select(all_of(ind_concentracion), IRCC),
+        title = 'Correlación de variables de concentración para entidades')
+```
+
+Es preocupante la poca correlación con la variable target
+
+```{r}
+ind_ent <- ind_ent %>% 
+  mutate(IRCC = rowMeans(ind_ent[, ind_concentracion])) %>%
+  select(-all_of(ind_concentracion))
+
+scale2 <- function(x, na.rm = FALSE) (x - mean(x, na.rm = na.rm)) / sd(x, na.rm)
+
+ggpairs(ind_ent %>% 
+          mutate_if(is.double, scale2) %>% 
+          select(contains('contratos'), contains('grupos'),
+                 contains('familias'), contains('contratistas'), IRCC),
+        title = 'Correlación de variable target con descriptivas')
+```
+
+Es mejor tomar la variable de adicion como una sola, aunque también preocupa la poca correlación
+
+```{r}
+ind_modificacion <- c('pnum_adicion_tiempo', 'pval_adicion_tiempo',
+                      'pnum_adicion_cuantia', 'pval_adicion_cuantia')
+
+ggpairs(ind_ent %>% 
+          mutate(adicion = rowMeans(ind_ent[, ind_modificacion])) %>%  
+          mutate_if(is.double, scale2) %>% 
+          select(all_of(ind_modificacion), adicion, IRCC),
+        title = 'Correlación de variable target con indicadores de adición')
+```
+
+Si tomamos la variable como categorica se puede apreciar un poco la distinción, pero la verdad no es tan significativo
+
+```{r}
+# Agregación de variable agrupada
+ind_ent <- ind_ent %>% 
+  mutate(adicion = rowMeans(ind_ent[, ind_modificacion]))
+
+# Puntos de cortes de la varaible adición
+median_ad <- median(ind_ent$adicion)
+q90_adicion <- quantile(ind_ent$adicion, probs = 0.9, names = F)
+
+# Creación de variable categorica
+ind_ent <- ind_ent %>% 
+  mutate(gr_adicion =  case_when(adicion <= median_ad ~ 'Sin',
+                                 adicion <= q90_adicion ~ 'Medio',
+                                 TRUE ~ 'Alto')) %>% 
+  select(-all_of(ind_modificacion))
+
+# grafica de puntos
+ggplot(ind_ent, aes(x = adicion, y = IRCC, color = gr_adicion)) + 
+  geom_point() + scale_x_continuous(breaks = seq(0, 85, 5)) +
+  theme_light() + 
+  labs(title = 'Relación de concentración y adiciones para entidades',
+       x = 'Indicador adición agrupado',
+       y = 'IRCC', color = 'Grupo\nadición',
+       caption = 'Contratación pública hospitalaria en Colombia 2014-2019.')
+```
+
+Al observar más en detalle la categorización en un diagrama de cajas se observa el hecho de que no hay tanta variación. Es de esperar que esta variable no salga como significativa.
+
+```{r}
+# grafica de cajas
+ggplot(ind_ent, aes(x = gr_adicion, y = IRCC)) + geom_boxplot() +
+  theme_classic() +
+  labs(title = 'Relación de concentración y adiciones para entidades',
+       x = 'Grupo de adición', y = 'IRCC',
+       caption = 'Contratación pública hospitalaria en Colombia 2014-2019.')
+
+# Actualización del conjuntos de datos
+ind_ent <- ind_ent %>% select(-adicion)
+```
+
+Con respecto a las variables que demuestran la contratación cerrada, se observa uan gran proporción de entidades que tienen un porcentaje del 100%
+
+```{r}
+ind_cerrada <- c('pnum_cont_cerrada', 'pval_cont_cerrada')
+
+ggpairs(ind_ent %>% 
+          mutate_if(is.double, scale2) %>% 
+          select(all_of(ind_cerrada), IRCC),
+        title = 'Correlación de variable target con indicadores de CC')
+```
+
+En este caso si es mejor dejarla así como estaba
+
+```{r}
+ggpairs(ind_ent %>% 
+         mutate(tnum_cerrada = if_else(pnum_cont_cerrada == 100, 1, 0),
+                tval_cerrada = if_else(pval_cont_cerrada == 100, 1, 0)) %>% 
+          select(tnum_cerrada, tval_cerrada, IRCC),
+        title = 'Correlación de variable target con indicadores de CC')
+```
+
+Resultado de variables finales de banderas rojas
+
+```{r}
+ggpairs(ind_ent %>% 
+          select(all_of(ind_cerrada), gr_adicion, pnum_ganadoras, IRCC),
+        title = 'Correlación de variable target con banderas rojas')
+```
+
+Con respecto a los contratistas
+
+```{r}
+correlacion(ind_cont %>% select(-id_contratista_std),
+            titulo = 'Correlación variables transaccionales para contratistas')
+```
+
+
+# Hallazgos y conclusiones

@@ -6,7 +6,7 @@
 # ****************************************************************************
 # 1. Librerias ----
 sapply(
- c('dplyr', 'readr'), 
+ c('dplyr', 'readr', 'lubridate'), 
  require, character.only = T
 )
 
@@ -15,6 +15,9 @@ direccion <- '1-2-Datasets_complementarios/'
 # Conjunto de datos SECOP
 contratos <- read_csv(paste0(direccion, 'secop_i_ips.csv.gz'),
                       locale = locale(encoding = 'UTF-8'))
+# Actividad de los contratistas
+act_contratistas <- read_csv(paste0(direccion, 'actividad_contratistas.csv'),
+                             locale = locale(encoding = 'UTF-8'))
 
 # 3. Conjunto de datos base ----
 # parámetros
@@ -31,13 +34,25 @@ ind_cont <- contratos %>% group_by(id_contratista_std) %>%
            val_contratos_desv = sd(valor_total_con_adiciones),
            num_familias_dif = n_distinct(nombre_familia),
            num_grupos_dif = n_distinct(nombre_grupo),
-           num_entidades_dif = n_distinct(nit_entidad)) %>% 
- filter(num_contratos >= cont_min,
-        num_entidades_dif >= rel_min)
+           num_entidades_dif = n_distinct(nit_entidad),
+           num_annos_activo = n_distinct(year(fecha_firma_contrato))) %>% 
+ filter(num_contratos >= cont_min, num_entidades_dif >= rel_min)
 
 # Remover contratistas que no entraron en el filtro
+# SECOP
 contratos <- contratos %>% 
  filter(id_contratista_std %in% ind_cont$id_contratista_std)
+# Act. contratistas
+act_contratistas <- act_contratistas %>% 
+  filter(id_contratista_std %in% ind_cont$id_contratista_std)
+
+# Agregación del indicador del número de municipios presentes
+act_contratistas <- act_contratistas %>% 
+  group_by(id_contratista_std) %>% 
+  summarise(num_municipios_dif = n())
+
+# Agregación al conjunto de datos
+ind_cont <- ind_cont %>% left_join(act_contratistas, by = 'id_contratista_std')
 
 # 4. Creación de indicadores de riesgo ----
 # 4.1. Indicadores por falta de competencia ----
