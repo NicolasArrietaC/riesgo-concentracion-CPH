@@ -299,8 +299,10 @@ contratos <- contratos %>%
 # 6.1. REmover la variable del representante legal
 contratos$id_contratista <- NULL
 contratos$razon_social_contratista <- NULL
+contratos$tipo_id_contratista <- NULL
 contratos$tipo_doc_representate_legal <- NULL
 contratos$id_representante_legal <- NULL
+contratos$nombre_representante_legal <- NULL
 
 # 5. Escritura de datos ----
 # Contratos

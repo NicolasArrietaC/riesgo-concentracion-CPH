@@ -164,6 +164,7 @@ rm(temp)
 
 # 4. Eliminación de variables ----
 contratos$municipio_ejecucion <- NULL
+contratos$dpto_mcpo_contratista <- NULL
 
 # 5. Escritura de datos ----
 # Conjunto contratos

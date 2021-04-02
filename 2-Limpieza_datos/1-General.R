@@ -7,7 +7,7 @@
 # ****************************************************************************
 # 1. Librerias ----
 sapply(
- c('dplyr', 'readr', 'stringr', 'tibble'), 
+ c('dplyr', 'readr', 'stringr', 'tibble', 'lubridate'), 
  require, character.only = T
 )
 
