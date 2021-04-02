@@ -103,7 +103,7 @@ median_v <- round(median(temp$v), 2)
 
 De acuerdo al histograma se encuentra una forma exponencial al analizar la cantidad de contratos, mientras que en la cuantía existe una forma de campana con un sesgo negativo. La memdiana de la cantidad de contratos por contratista es de `r median_n`, mientras que la cuantía total es de `r median_v` millones.
 
-```{r}
+```{r grafico contratistas}
 # Graficas
 pt1 <- temp %>% ggplot(aes(n)) + 
   geom_histogram(fill = '#264653') +
@@ -135,7 +135,7 @@ grid.arrange(pt1, pt2, ncol=2,
 
 Existe una relación directa muy fuerte del número de contratos con el número de contratistas con los que tienen relación una entidad. Por lo que se puede determinar un hecho relevante, ya que puede ser un factor para detectar outliers, sin embargo, para este caso no se presentan casos excepcionales.
 
-```{r}
+```{r Rel. entidades}
 temp <- contratos %>% group_by(nit_entidad) %>% 
  summarise(n = n(), v = sum(valor_total_con_adiciones) / 1e6,
            n_contratistas = n_distinct(id_contratista_std),
@@ -145,29 +145,32 @@ temp <- contratos %>% group_by(nit_entidad) %>%
 ggplot(temp, aes(x = n, y = n_contratistas, color = sale)) + 
   geom_point(alpha = 0.5, color = temp$col) +
   scale_x_continuous(trans = 'log10') +
-  scale_y_continuous(trans = 'log10') + theme_light() + 
+  scale_y_continuous(trans = 'log10') + 
+  theme_light() + 
  labs(title = 'Comportamiento de las entidades con relación a los contratistas',
       x = 'Número de contratos', y = 'Número de contratistas',
       caption = 'Contratación pública hospitalaria en Colombia 2014-2019')
 ```
 
-```{r}
+A Continuación, se presenta la tabla con los casos que pueden ser descartados en el estudio de concentración, adicionalmente la representación en valor y en frecuencia.
+
+```{r Entidades descartadas}
 temp <- temp %>% filter(n <= 5 | n_contratistas <= 4) %>% 
   group_by(n, n_contratistas) %>% 
   summarise(nn = n(), cuantia = sum(v),
-            pn = nn/nrow(temp) * 100, pv = cuantia/sum(temp$v)* 100)
-
-kable(temp)
+            pn = nn/nrow(temp) * 100, pv = cuantia/sum(temp$v) * 100) %>% 
+  select(-all_of(c('nn', 'cuantia')))
+  
+# Impresión
+kable(temp %>% rename(`# contratos` = n, `# contratistas` = n_contratistas,
+         `% entidades` = pn, `% valor` = pv))
 ```
 
 De acuerdo al estudio no se tendran en cuenta entidades que tengan poca participación, es decir, que tengan menos de 6 contratos o una relación con menos de 4 contratistas. Por lo tanto, las entidades que se descartaron corresponden al `r round(sum(temp$pn), 2)`% del total de entidades y el valor de los contratos corresponde a un `r round(sum(temp$pv), 2)`% del valor de todos los contratos.
 
-Por parte de los contratistas, no se observa un patrón claro de la relación de los contratos y el número de entidades, como sucede en el anterior caso con las entidades. 
+Por parte de los contratistas se observa un comportamiento más caotico a comparación de las entidades, debido a que si se percibe un poco la tendencia positiva, también se puede representar mediante una nube de puntos. Esto también  refuerza la idea de las diferencias en las características entre entidades y contratistas.
 
-
-por lo que se refuerza la idea de las diferencias de las características entre entidades y contratistas.
-
-```{r}
+```{r Rel. Contratistas}
 temp <- contratos %>% group_by(id_contratista_std) %>% 
  summarise(n = n(), v = sum(valor_total_con_adiciones) / 1e6,
            n_entidades = n_distinct(nit_entidad),
@@ -187,70 +190,29 @@ ggplot(temp[sp,], aes(x = n, y = n_entidades, color = sale)) +
       caption = 'Contratación pública hospitalaria en Colombia 2014-2019 (10%)')
 ```
 
-```{r}
+Un comportamiento importante que cabe mencionar es la participación mayoritaria de contratistas que tienen poca relaciones en el mercado de contratación. A continuación, se presenta una tabla con la representación en cantidad de contratos y en valor para los contratistas que tienen relación con una única entidad para varios rangos de volumen de contratación.
+
+```{r Contratistas descartadas}
 temp2 <- temp %>% filter(n <= 1 | n_entidades <= 1) %>% 
-  group_by(n, n_entidades) %>% 
+  mutate(categoria = case_when(n == 1 ~ 'Una sola vez',
+    n <= 10 ~ '2-10', n <= 100 ~ '11-100',
+    n <= 1000 ~ '101-1K', n > 1000 ~ '>1K')) %>% 
+  group_by(categoria) %>% 
   summarise(nn = n(), cuantia = sum(v),
-            pn = nn/nrow(temp) * 100, pv = cuantia/sum(temp$v)* 100)
+            pn = nn/nrow(temp) * 100, pv = cuantia/sum(temp$v)* 100) %>% 
+  arrange(desc(pn)) %>% select(-all_of(c('nn', 'cuantia')))
 
-kable(temp2)
+# Impresión
+kable(temp2 %>% rename(`Rango contratos` = categoria, 
+                       `% contratistas` = pn, `% valor` = pv))
 ```
 
+Es sorprendente como este grupo representa un `r round(sum(temp2$pn), 2)`% del total de contratistas y un valor del `r round(sum(temp2$pv), 2)`%. Por lo tanto, en el estudio de concentración se está analizando una porción minoritaria de los contratistas en la contratación pública hospitalaria que merece la aclaración al momento de determinar los hallazgos.
 
-*¿Cúal es el valor de los contratos de los contratistas que tienen entre 1 contrato hasta 5 contratos?*
-
-Los contratistas que presentan 5 o menos contratos firmados entre el periodo presentan un 30% del valor de los contratos de la contratación pública hospitalaria.
-
-```{r}
-v_tot <- sum(temp$v)
-
-temp <- temp %>% filter(n <= 5) %>% group_by(n) %>% 
-  summarise(N = n(), v = sum(v),
-            p = round(v / v_tot * 100, 2)) %>% 
-  rename(Num_contratos = n, Cantidad_contratistas = N,
-         Cuantia = v, Porcion = p)
-  
-kable(temp)
-```
-
-*¿Existe un cambio en el tiempo con respecto a la adquisición de contratos y el valor de estos?*
-
-Existe una periodicidad en el gasto pública, en el cual el trimestre que inicia el año es el más alto y el cuarto presenta una menor actividad.
-
-```{r}
-# Creación de trimestre
-temp <- contratos %>% 
-  mutate(trimestre = quarter(fecha_firma_contrato, with_year = T)) %>%
-  group_by(trimestre, nit_entidad) %>% 
-  summarise(n = n(),
-            v = sum(valor_total_con_adiciones) / 1e6) %>% 
-  ungroup(nit_entidad) %>% 
-  summarise(mean_n = mean(n), sd_n = sd(n),
-            mean_v = mean(v), sd_v = sd(v))
-
-kable(temp)
-```
-
-Entre los contratistas se presenta un comportamiento similar, aunque no tan pronunciado. 
-
-```{r}
-# Creación de trimestre
-temp <- contratos %>% 
-  mutate(trimestre = quarter(fecha_firma_contrato, with_year = T)) %>%
-  group_by(trimestre, id_contratista_std) %>% 
-  summarise(n = n(),
-            v = sum(valor_total_con_adiciones) / 1e6) %>% 
-  ungroup(id_contratista_std) %>% 
-  summarise(mean_n = mean(n), sd_n = sd(n),
-            mean_v = mean(v), sd_v = sd(v))
-
-kable(temp)
-```
+Otro hecho sorprendente es que existen contratistas que tienen un nivel de contratación muy alto pero solamente con una entidad. Por ejemplo, El hospital de San Andrés lidera este grupo con 1970 contratos. Aunque este actor realmente se puede ver como una entidad que opera como contratista y se realizaron ajustes para actuar en contratos estatales, se pueden ver casos donde si hay nombres de organizaciones privadas con una cantidad superior a los mil contratos.
 
 # Hallazgos y Conclusiones
 
-* Las entidades y contratistas presentan diferencias en la forma en que se distribuye los contratos. La causa principal es por la participación mayor de los contratitasta, lo que provoca que exista una mayor proporción de actores que apenas participan en uno o dos contratos. Es por esto que es de esperar que las entidades manejen un mayor nivel de contratos y la cuantia de estos.
+* Las entidades y contratistas presentan diferencias en la forma en que se distribuye los contratos. La causa principal es por la participación mayor de los contratitasta, lo que provoca que exista una mayor proporción de actores que apenas participan en uno o dos contratos, adicionalmente existen contratistas con pocas relaciones con entidades. Es por esto que es de esperar que las entidades manejen un mayor nivel de contratos y la cuantia de estos.
 
-* El comportamiento de la contratación es estacional de acuerdo a que a inicios de cada año las entidades aumentan su nivel de compra, lo que genera el mismo efecto de los contratistas pero sin tanta variación.
-
-* De acuerdo a que los indicadores de concentración requieren que exista un historico de los actores que van a participar, es necesario establecer un limite de los contratistas y entidades que van a entrar en el estudio.
+* De acuerdo a que los indicadores de concentración requieren que exista un historico de los actores que van a participar, es necesario establecer un limite de los contratistas y entidades que van a entrar en el estudio. Con respecto a las entidades se cuenta con la mayoria de actores, mientras que para los contratistas es necesario hacer la aclaración que se cuenta con el `r 100 - round(sum(temp2$pn), 2)`% de los contratistas del total. Debido a que el otro restante no presentan suficiente datos historicos para agregarlos al análisis de concentración.
