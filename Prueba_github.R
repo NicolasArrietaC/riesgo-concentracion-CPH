@@ -7,3 +7,8 @@ plot (x = x, y = y)
 # Grafica
 plot(x,y)
 
+#Parte 2 de lizeth
+"Hola mundo"
+
+w <- x+y 
+
