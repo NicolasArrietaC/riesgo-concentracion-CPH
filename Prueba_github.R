@@ -12,3 +12,9 @@ plot(x,y)
 
 w <- x+y 
 
+# Parte 3 Lizeth
+"Hola mundo mundial"
+
+w <- x+y 
+
+
