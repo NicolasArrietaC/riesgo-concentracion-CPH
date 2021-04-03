@@ -7,3 +7,7 @@ plot (x = x, y = y)
 # Grafica
 plot(x,y)
 
+# Parte nicolas
+y <- x*24 
+plot (x = y, y = x)
+
