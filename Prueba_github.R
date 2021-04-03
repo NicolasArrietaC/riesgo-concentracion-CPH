@@ -4,4 +4,5 @@ plot(x)
 # Agregación de x y y
 y <- rnorm(n = 4,sd = 1, mean = 0)
 
+# Grafica
 plot(x,y)
