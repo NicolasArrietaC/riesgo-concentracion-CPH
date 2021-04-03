@@ -7,7 +7,14 @@ plot (x = x, y = y)
 # Grafica
 plot(x,y)
 
-# Parte nicolas
-y <- x*24 
-plot (x = y, y = x)
+#Parte 2 de lizeth
+"Hola mundo"
+
+w <- x+y 
+
+# Parte 3 Lizeth
+"Hola mundo mundial"
+
+w <- x+y 
+
 
