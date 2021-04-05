@@ -4,24 +4,22 @@
 # actores de la contratación pública, a partir de datos transaccionales y 
 # de fuentes secundarias.
 #
-# Variable target: val_HHI (Cuantitativa)
+# Variable target: IRCC (Indice de riesgo de concentración)
 # Método de aprendizaje: Modelo lineal
 # ****************************************************************************
 # 1. Librerias ----
 sapply(
- c('tidymodels'), 
+ c('tidymodels', 'readr'), 
  require, character.only = T
 )
 
 # 2. Lectura de datos ----
-direccion <- paste0('C:/Users/nico2/Proyectos/contratacion_publica/',
-                    'riesgo-concentracion-CPH/1-1-Datasets/entidades/')
+direccion <- paste0('1-1-Datasets/entidades/')
 
 # Conjunto de entrenamiento
-entidades <- read_csv(paste0(direccion, '1A_entidades.csv'))
+entidades <- read_csv(paste0(direccion, '2A_entidades.csv'))
 
 # 3. Preprocesamiento ----
-
 # Division del conjunto de datos
 set.seed(73) # fijar semilla
 entidades_split <- initial_split(entidades, prop = 4/5)
@@ -32,18 +30,52 @@ entidades_test <- testing(entidades_split) # test
 
 # Estandarización de variables
 # Receta
-entidades_rec <- recipe(val_HHI ~ ., 
-                        data = entidades_train) %>% # Variables del modelo
- step_rm(nit_entidad) %>% # Remover la varaible de identificación
- step_normalize(all_numeric(), -val_HHI) %>% # Normaliza los datos numericos
- step_dummy(all_nominal(), one_hot = TRUE) # Crea variables dummy
+entidades_rec <- recipe(IRCC ~ ., data = entidades) %>% # Variables del modelo
+ step_normalize(all_numeric(), -all_outcomes()) %>% # Normaliza los datos numéricos
+ step_dummy(all_nominal(), -nit_entidad) %>% # Crea variables dummy
+ step_rm(nit_entidad)
+
+# Revisión de la salida
+summary(entidades_rec)
 
 # Conjunto estandarizado
-entidades_train_prep <- entidades_rec %>%
+# Train
+entidades_train <- entidades_rec %>%
  prep(entidades_train) %>% # Aplicar el preprocesamiento al train
  juice()
+# Test
+entidades_test <- entidades_rec %>%
+        prep(entidades_test) %>% # Aplicar el preprocesamiento al test
+        juice()
 
 # 4. Diseño del modelo ----
 # Modelo lineal
-lm_reg <- lm(val_HHI ~ ., data = entidades_train_prep)
-summary(lm_reg)
+lm_model <- linear_reg() %>% 
+        set_engine('lm') %>% # adds lm implementation of linear regression
+        set_mode('regression')
+
+# 5. Entrenamiento ----
+IRCC_fit <- lm_model %>% 
+        fit(IRCC ~ ., data = entidades_train)
+
+# 6. Anpalisis de resultados ----
+# Resultados del ajuste
+summary(IRCC_fit$fit)
+
+# Prueba del modelo con los datos de entrenamiento 
+entidades_test$pred <- predict(IRCC_fit, new_data = entidades_test)[[1]]
+
+# Analisis grafico de valores predecidos vs reales
+ggplot(entidades_test, aes(x = pred, y = IRCC)) + 
+        geom_point(alpha = 0.3, size = 1) +
+        geom_abline(intercept = 0, slope = 1, color = '#F4A261') +
+        labs(title = 'Valores reales vs predicción para el IRCC contratistas',
+             x = 'Predicción', y = 'Real',
+             caption = 'Contratación pública hospitalaria en Colombia 2014-2019') +
+        theme_light()
+
+# Calculo del RMSE
+attach(entidades_test)
+
+rmse <- sqrt(sum((IRCC - pred) ^ 2) / nrow(entidades_test))
+print(paste('Valor RMSE:', round(rmse, 2)))
