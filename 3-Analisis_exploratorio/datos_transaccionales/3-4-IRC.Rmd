@@ -1,0 +1,135 @@
+---
+title: "Análisis de los indicadores propuestos para la concentración de los actores en CPH"
+subtitle: 'SIGMAP: Semillero de Investigación en Gestión, Mejora y Análisis de Procesos'
+author: "Nicolas Arrieta y Lizeth Jerez"
+date: "19/02/2021"
+output:
+  html_document: 
+    code_folding: hide
+    theme: flatly
+    toc: yes
+    toc_depth: 2
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+# Librerias y conjunto de datos
+
+En este caso los conjuntos de datos empleados son el resultado de las etapas de preprocesamiento.
+
+```{r setup, message=F, warning=F}
+# Librerias
+sapply(
+ c('dplyr', 'readr', 'stringr', 'ggplot2', 'gridExtra', 'lubridate',
+   'knitr', 'skimr', 'reshape2', 'GGally'), 
+ require, character.only = T
+)
+
+# Ajustes definidos para el documento
+knitr::opts_chunk$set(message = F, warning = F, fig.align = "center")
+
+# Carga de datos
+# Informativos
+direccion <- paste0('C:/Users/nico2/Proyectos/contratacion_publica/',
+                    'riesgo-concentracion-CPH/1-2-Datasets_complementarios/')
+
+entidades <- read_csv(paste0(direccion, 'entidades.csv'),
+                      locale = locale(encoding = 'UTF-8'))
+  
+contratistas <- read_csv(paste0(direccion, 'actividad_contratistas.csv'))
+
+#Transaccionales
+direccion <- paste0('C:/Users/nico2/Proyectos/contratacion_publica/',
+                    'riesgo-concentracion-CPH/1-1-Datasets/')
+
+# Indicadores entidades
+ind_ent <- read_csv(paste0(direccion, 'entidades/1B_entidades.csv'))
+
+# Indicadores contratistas
+ind_cont <- read_csv(paste0(direccion, 'contratistas/2B_contratistas.csv'))
+
+# Terridata
+# Indicadores educación
+ind_ed <- read_csv(paste0(direccion,
+                          'terridata/1-2A_terr_indsel_educacion.csv'))
+
+# Indicadores finanzas públicas
+ind_fp <- read_csv(paste0(direccion,
+                          'terridata/1-2A_terr_indsel_financiero.csv'))
+```
+
+## Unión de Conjunto de datos
+
+Entidades
+
+```{r}
+# Unión del conjunto de datos de educación al de entidades
+entidades <- entidades %>% left_join(ind_ed, 
+                        by = c('cod_munp_entidad' = 'codigo_entidad'))
+
+# Unión del conjunto de datos de educación al de entidades
+entidades <- entidades %>% left_join(ind_fp, 
+                        by = c('cod_munp_entidad' = 'codigo_entidad'))
+```
+
+Contratistas
+
+```{r}
+# Filtro de contratistas de interés
+contratistas <- contratistas %>% 
+  filter(id_contratista_std %in% ind_cont$id_contratista_std)
+
+# Unión del conjunto de datos de educación al de entidades
+contratistas <- contratistas %>% left_join(ind_ed, 
+                        by = c('cod_munp_ejecucion' = 'codigo_entidad'))
+
+# Unión del conjunto de datos de educación al de entidades
+contratistas <- contratistas %>% left_join(ind_fp, 
+                        by = c('cod_munp_ejecucion' = 'codigo_entidad'))
+
+# Ajuste de la ponderación
+cols <- str_detect(names(contratistas), 'inf|ine')
+
+contratistas[, cols] <- contratistas[, cols] * contratistas$p
+
+# Agrupamiento por contratista
+contratistas <- contratistas %>% group_by(id_contratista_std) %>% 
+  summarise(across(names(contratistas)[cols], ~ sum(.x, na.rm = TRUE)))
+```
+
+
+# Análisis exploratorio
+
+## Resumen estadístico
+
+A continuación se presenta un resumen estadístico para cada una de las variables de los conjuntos de entidades y contratistas.
+
+**Resumen para entidades**
+
+```{r resumen entidad}
+skim(ind_ent)
+```
+
+**Resumen para contratistas**
+
+```{r resumen contratista}
+skim(ind_cont)
+```
+
+## Análisis de correlación
+
+
+
+# Hallazgos y conclusiones
+
+
+```{r Escritura de datos, eval=FALSE, include=FALSE}
+# Contratistas
+write_csv(ind_cont, paste0(direccion, 'contratistas/2A_contratistas.csv'))
+# Entidades
+write_csv(ind_ent, paste0(direccion, 'entidades/2A_entidades.csv'))
+```
+

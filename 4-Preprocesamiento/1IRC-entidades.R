@@ -38,6 +38,10 @@ ind_ent <- contratos %>% group_by(nit_entidad) %>%
 # Remover entidades que no entraron en el filtro
 contratos <- contratos %>% filter(nit_entidad %in% ind_ent$nit_entidad)
 
+# Conjunto de datos de las entidades con us ubicación geografica
+entidades <- contratos %>% 
+  select(nombre_entidad, nit_entidad, cod_munp_entidad) %>% distinct()
+
 # 4. Creación de indicadores de riesgo ----
 # 4.1. Indicadores por falta de competencia ----
 # 4.1.1. Indice Herfindahl–Hirschman ----
@@ -61,10 +65,10 @@ ind_ent <- ind_ent %>% left_join(temp, by = 'nit_entidad')
 #         pval_cont_cerrada: porcentaje de contratos donde su tipo de proceso
 #         está marcado como contratacion directa o regimen especial.
 temp <- contratos %>% 
- mutate(es_cd_o_re = tipo_proceso_cod %in% c(4,7), # códigos de cd y re
-        valor_total = valor_total_con_adiciones * es_cd_o_re) %>% 
+ mutate(es_cc = tipo_proceso_cod %in% c(4), # códigos de cd y re
+        valor_total = valor_total_con_adiciones * es_cc) %>% 
  group_by(nit_entidad) %>% 
- summarise(pnum_cont_cerrada = sum(es_cd_o_re) / n() * 100,
+ summarise(pnum_cont_cerrada = sum(es_cc) / n() * 100,
    pval_cont_cerrada = sum(valor_total) / sum(valor_total_con_adiciones) * 100)
 
 # Agregación al conjunto de datos
@@ -135,5 +139,9 @@ temp <- contratos %>%
 ind_ent <- ind_ent %>% left_join(temp, by = 'nit_entidad')
 
 # 5. Escritura del conjunto de datos ----
+# Conjunto de información de entidades
+write_csv(entidades, paste0(direccion, 'entidades.csv'))
+
+# Conjunto de indicadores de entidades
 direccion <- '1-1-Datasets/entidades/'
 write_csv(ind_ent, paste0(direccion, '1A_entidades.csv'))
