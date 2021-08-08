@@ -1,0 +1,174 @@
+---
+title: "Análisis de los indicadores propuestos para la concentración de los actores en CPH"
+subtitle: 'SIGMAP: Semillero de Investigación en Gestión, Mejora y Análisis de Procesos'
+author: "Nicolas Arrieta y Lizeth Jerez"
+date: "26/05/2021"
+output:
+  html_document: 
+    code_folding: hide
+    theme: flatly
+    toc: yes
+    toc_depth: 2
+editor_options: 
+  chunk_output_type: console
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+# Librerias y conjunto de datos
+
+En este caso los conjuntos de datos empleados son el resultado de las etapas de preprocesamiento.
+
+```{r setup, message=F, warning=F}
+# Librerias
+sapply(
+ c('tibble', 'dplyr', 'readr', 'ggplot2', 'gridExtra', 'lubridate',
+   'knitr', 'skimr', 'reshape2', 'GGally'), 
+ require, character.only = T
+)
+
+# Ajustes definidos para el documento
+knitr::opts_chunk$set(message = F, warning = F, fig.align = "center")
+
+# Carga de datos
+direccion <- paste0('C:/Users/nico2/Analytica Projects/contratacion_publica',
+                    '/riesgo-concentracion-CPH/1-1-Datasets/')
+# Indicadores entidades
+ind_ent_abs <- read_csv(paste0(direccion, 'entidades/2A_entidades.csv'),
+                        locale = locale(encoding = 'UTF-8'))
+
+ind_ent_abs <- ind_ent_abs |> column_to_rownames(var = "nit_entidad")
+
+ind_ent_r <- read_csv(paste0(direccion, 'entidades/3A_entidades.csv'),
+                      locale = locale(encoding = 'UTF-8'))
+
+ind_ent_r <- ind_ent_r |> column_to_rownames(var = "nit_entidad")
+
+# Indicadores contratistas
+ind_cont_abs <- read_csv(paste0(direccion, 'contratistas/2A_contratistas.csv'),
+                         locale = locale(encoding = 'UTF-8'))
+
+ind_cont_abs <- ind_cont_abs |> column_to_rownames(var = "id_contratista_std")
+
+ind_cont_r <- read_csv(paste0(direccion, 'contratistas/3A_contratistas.csv'),
+                       locale = locale(encoding = 'UTF-8'))
+
+ind_cont_r <- ind_cont_r |> column_to_rownames(var = "id_contratista_std")
+```
+
+# Análisis
+
+```{r}
+correlacion <- function(data, titulo){
+
+   data <- data %>%
+    cor(use = "complete.obs")
+   
+   data <- round(x = data, digits = 2)
+   
+   data <- melt(data)
+   
+   ggplot(data = data, aes(x = Var1, y = Var2, 
+                           fill = value)) + geom_tile() +
+   theme(axis.text.x = element_text(angle = 45, vjust = 1, 
+    size = 7, hjust = 1),
+    axis.text.y = element_text(size = 7)) +
+   scale_fill_gradient2(low = "#2ca25f", 
+                      high = "#d95f0e", mid = "#fff7bc", 
+   midpoint = 0, limit = c(-1,1), space = "Lab", 
+   name ="Correlación\nPearson") +
+     labs(x = "", y = "", title = titulo,
+          caption = 'Contratación pública hospitalaria en Colombia 2014-2019.')
+}
+
+correlacion(ind_ent_abs, titulo = 'Variables entidades absolutas')
+```
+
+```{r}
+correlacion(ind_ent_r, titulo = 'Variables entidades relativas')
+```
+
+```{r}
+correlacion(ind_cont_abs, titulo = 'Variables contratistas absolutas')
+```
+
+```{r}
+correlacion(ind_cont_r, titulo = 'Variables contratistas absolutas')
+```
+
+# Creación del IRCC
+
+```{r}
+ind_concentracion <- c('num_HHI', 'val_HHI', 'pnum_ic4k', 'pval_ic4k')
+
+ind_ent_abs <- ind_ent_abs %>% 
+  mutate(IRCC = rowMeans(ind_ent_abs[, ind_concentracion]),
+         IRCCG = case_when(
+                   IRCC < 15 ~ 'Bajo',
+                   IRCC < 30 ~ 'Medio',
+                   TRUE ~ 'Alto'))
+
+# Actualización del conjunto de datos
+ind_ent_abs <- ind_ent_abs %>% 
+  select(-all_of(ind_concentracion))
+```
+
+```{r}
+ind_ent_r <- ind_ent_r %>% 
+  mutate(IRCC = rowMeans(ind_ent_r[, ind_concentracion]),
+         IRCCG = case_when(
+                   IRCC < 15 ~ 'Bajo',
+                   IRCC < 30 ~ 'Medio',
+                   TRUE ~ 'Alto'))
+
+# Actualización del conjunto de datos
+ind_ent_r <- ind_ent_r %>% 
+  select(-all_of(ind_concentracion))
+```
+
+
+```{r}
+ind_concentracion <- c('num_HHI', 'val_HHI', 'pnum_ic1k', 'pval_ic1k')
+
+ind_cont_abs <- ind_cont_abs %>% 
+  mutate(IRCC = rowMeans(ind_cont_abs[, ind_concentracion]),
+         IRCCG = case_when(
+                   IRCC < 60 ~ 'Bajo',
+                   IRCC < 80 ~ 'Medio',
+                   TRUE ~ 'Alto'))
+
+# Actualización del conjunto de datos
+ind_cont_abs <- ind_cont_abs %>% 
+  select(-all_of(ind_concentracion))
+```
+
+```{r}
+ind_cont_r <- ind_cont_r %>% 
+  mutate(IRCC = rowMeans(ind_cont_r[, ind_concentracion]),
+         IRCCG = case_when(
+                   IRCC < 60 ~ 'Bajo',
+                   IRCC < 80 ~ 'Medio',
+                   TRUE ~ 'Alto'))
+
+# Actualización del conjunto de datos
+ind_cont_r <- ind_cont_r %>% 
+  select(-all_of(ind_concentracion))
+```
+
+## Escritura de datos
+
+```{r}
+direccion <- '1-1-Datasets/entidades/'
+write_csv(ind_ent_abs, paste0(direccion, '2B_entidades.csv'))
+write_csv(ind_ent_r, paste0(direccion, '3B_entidades.csv'))
+```
+
+```{r}
+direccion <- '1-1-Datasets/contratistas/'
+write_csv(ind_cont_abs, paste0(direccion, '2B_contratistas.csv'))
+write_csv(ind_cont_r, paste0(direccion, '3B_contratistas.csv'))
+```
+

@@ -1,0 +1,9 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+1-2-Datasets_complementarios/secop_i_ips.csv.gz
+*.gz
+*.html
+*.pdf
+*.png
