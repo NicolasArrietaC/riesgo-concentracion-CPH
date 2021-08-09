@@ -20,8 +20,8 @@ contratos <- read_csv(paste0(direccion, 'secop_i_ips.csv.gz'),
 # 3. Conjunto de datos base ----
 # parámetros
 # Número de contratos mínimos
-cont_min <- 2 # Por lo menos un contrato por año en promedio
-rel_min <- 3 # relación minima con entidades
+cont_min <- 3 # Por lo menos un contrato por año en promedio
+rel_min <- 2 # relación minima con entidades
 
 # Consulta
 grupo_cont <- contratos |> 

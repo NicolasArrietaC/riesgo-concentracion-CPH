@@ -16,6 +16,8 @@ direccion <- '1-2-Datasets_complementarios/'
 contratos <- read_csv(paste0(direccion, 'secop_i_ips.csv.gz'),
                       locale = locale(encoding = 'UTF-8'))
 
+contratos[contratos$nit_entidad == "ND36", "orden_entidad"] <- 5
+
 # 3. Conjunto de datos base ----
 # parámetros
 # Número de contratos mínimos
@@ -23,7 +25,7 @@ cont_min <- 6 # Por lo menos un contrato por año en promedio
 rel_min <- 5 # relación minima con contratistas
 
 # Consulta
-ind_ent <- contratos %>% group_by(nit_entidad) %>% 
+ind_ent <- contratos %>% group_by(nit_entidad, orden_entidad) %>% 
  summarise(num_contratos = n(),
            val_contratos = sum(valor_total_con_adiciones),
            val_contratos_media = mean(valor_total_con_adiciones),

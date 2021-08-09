@@ -1,0 +1,1123 @@
+﻿codigo_departamento,departamento,codigo_municipio,municipio,valor_agregado,peso_relativo
+5,Antioquia,5001,Medellín,"51,535",42.7
+5,Antioquia,5002,Abejorral,225,0.2
+5,Antioquia,5004,Abriaquí,19,0
+5,Antioquia,5021,Alejandría,45,0
+5,Antioquia,5030,Amagá,467,0.4
+5,Antioquia,5031,Amalfi,656,0.5
+5,Antioquia,5034,Andes,678,0.6
+5,Antioquia,5036,Angelópolis,94,0.1
+5,Antioquia,5038,Angostura,129,0.1
+5,Antioquia,5040,Anorí,134,0.1
+5,Antioquia,5042,Santa Fé de Antioquia,293,0.2
+5,Antioquia,5044,Anzá,93,0.1
+5,Antioquia,5045,Apartadó,"2,476",2.1
+5,Antioquia,5051,Arboletes,327,0.3
+5,Antioquia,5055,Argelia,74,0.1
+5,Antioquia,5059,Armenia,46,0
+5,Antioquia,5079,Barbosa,832,0.7
+5,Antioquia,5086,Belmira,72,0.1
+5,Antioquia,5088,Bello,"5,060",4.2
+5,Antioquia,5091,Betania,151,0.1
+5,Antioquia,5093,Betulia,225,0.2
+5,Antioquia,5101,Ciudad Bolívar,338,0.3
+5,Antioquia,5107,Briceño,73,0.1
+5,Antioquia,5113,Buriticá,74,0.1
+5,Antioquia,5120,Cáceres,431,0.4
+5,Antioquia,5125,Caicedo,104,0.1
+5,Antioquia,5129,Caldas,999,0.8
+5,Antioquia,5134,Campamento,61,0.1
+5,Antioquia,5138,Cañasgordas,145,0.1
+5,Antioquia,5142,Caracolí,45,0
+5,Antioquia,5145,Caramanta,62,0.1
+5,Antioquia,5147,Carepa,"1,034",0.9
+5,Antioquia,5148,El Carmen de Viboral,569,0.5
+5,Antioquia,5150,Carolina,36,0
+5,Antioquia,5154,Caucasia,"1,102",0.9
+5,Antioquia,5172,Chigorodó,909,0.8
+5,Antioquia,5190,Cisneros,91,0.1
+5,Antioquia,5197,Cocorná,134,0.1
+5,Antioquia,5206,Concepción,46,0
+5,Antioquia,5209,Concordia,266,0.2
+5,Antioquia,5212,Copacabana,"1,074",0.9
+5,Antioquia,5234,Dabeiba,235,0.2
+5,Antioquia,5237,Donmatías,410,0.3
+5,Antioquia,5240,Ebéjico,202,0.2
+5,Antioquia,5250,El Bagre,872,0.7
+5,Antioquia,5264,Entrerríos,314,0.3
+5,Antioquia,5266,Envigado,"8,754",7.3
+5,Antioquia,5282,Fredonia,297,0.2
+5,Antioquia,5284,Frontino,152,0.1
+5,Antioquia,5306,Giraldo,43,0
+5,Antioquia,5308,Girardota,"1,866",1.5
+5,Antioquia,5310,Gómez Plata,300,0.2
+5,Antioquia,5313,Granada,71,0.1
+5,Antioquia,5315,Guadalupe,55,0
+5,Antioquia,5318,Guarne,"1,170",1
+5,Antioquia,5321,Guatapé,295,0.2
+5,Antioquia,5347,Heliconia,60,0.1
+5,Antioquia,5353,Hispania,58,0
+5,Antioquia,5360,Itagüí,"7,247",6
+5,Antioquia,5361,Ituango,190,0.2
+5,Antioquia,5364,Jardín,177,0.1
+5,Antioquia,5368,Jericó,166,0.1
+5,Antioquia,5376,La Ceja,687,0.6
+5,Antioquia,5380,La Estrella,"1,680",1.4
+5,Antioquia,5390,La Pintada,144,0.1
+5,Antioquia,5400,La Unión,212,0.2
+5,Antioquia,5411,Liborina,93,0.1
+5,Antioquia,5425,Maceo,82,0.1
+5,Antioquia,5440,Marinilla,889,0.7
+5,Antioquia,5467,Montebello,97,0.1
+5,Antioquia,5475,Murindó,38,0
+5,Antioquia,5480,Mutatá,196,0.2
+5,Antioquia,5483,Nariño,126,0.1
+5,Antioquia,5490,Necoclí,553,0.5
+5,Antioquia,5495,Nechí,306,0.3
+5,Antioquia,5501,Olaya,35,0
+5,Antioquia,5541,Peñol,323,0.3
+5,Antioquia,5543,Peque,87,0.1
+5,Antioquia,5576,Pueblorrico,72,0.1
+5,Antioquia,5579,Puerto Berrío,637,0.5
+5,Antioquia,5585,Puerto Nare,408,0.3
+5,Antioquia,5591,Puerto Triunfo,179,0.1
+5,Antioquia,5604,Remedios,541,0.4
+5,Antioquia,5607,Retiro,396,0.3
+5,Antioquia,5615,Rionegro,"3,158",2.6
+5,Antioquia,5628,Sabanalarga,85,0.1
+5,Antioquia,5631,Sabaneta,"2,928",2.4
+5,Antioquia,5642,Salgar,238,0.2
+5,Antioquia,5647,San Andrés de Cuerquía,56,0
+5,Antioquia,5649,San Carlos,692,0.6
+5,Antioquia,5652,San Francisco,67,0.1
+5,Antioquia,5656,San Jerónimo,154,0.1
+5,Antioquia,5658,San José de la Montaña,33,0
+5,Antioquia,5659,San Juan de Urabá,210,0.2
+5,Antioquia,5660,San Luis,98,0.1
+5,Antioquia,5664,San Pedro de los milagros,812,0.7
+5,Antioquia,5665,San Pedro de Urabá,273,0.2
+5,Antioquia,5667,San Rafael,173,0.1
+5,Antioquia,5670,San Roque,170,0.1
+5,Antioquia,5674,San Vicente Ferrer,195,0.2
+5,Antioquia,5679,Santa Bárbara,254,0.2
+5,Antioquia,5686,Santa Rosa de Osos,853,0.7
+5,Antioquia,5690,Santo Domingo,152,0.1
+5,Antioquia,5697,El Santuario,311,0.3
+5,Antioquia,5736,Segovia,600,0.5
+5,Antioquia,5756,Sonsón,729,0.6
+5,Antioquia,5761,Sopetrán,146,0.1
+5,Antioquia,5789,Támesis,195,0.2
+5,Antioquia,5790,Tarazá,354,0.3
+5,Antioquia,5792,Tarso,115,0.1
+5,Antioquia,5809,Titiribí,138,0.1
+5,Antioquia,5819,Toledo,72,0.1
+5,Antioquia,5837,Turbo,"2,235",1.9
+5,Antioquia,5842,Uramita,67,0.1
+5,Antioquia,5847,Urrao,561,0.5
+5,Antioquia,5854,Valdivia,166,0.1
+5,Antioquia,5856,Valparaíso,111,0.1
+5,Antioquia,5858,Vegachí,110,0.1
+5,Antioquia,5861,Venecia,177,0.1
+5,Antioquia,5873,Vigía del Fuerte,49,0
+5,Antioquia,5885,Yalí,66,0.1
+5,Antioquia,5887,Yarumal,542,0.4
+5,Antioquia,5890,Yolombó,208,0.2
+5,Antioquia,5893,Yondó,817,0.7
+5,Antioquia,5895,Zaragoza,399,0.3
+8,Atlántico,8001,Barranquilla,"24,430",66.4
+8,Atlántico,8078,Baranoa,659,1.8
+8,Atlántico,8137,Campo de la Cruz,98,0.3
+8,Atlántico,8141,Candelaria,77,0.2
+8,Atlántico,8296,Galapa,676,1.8
+8,Atlántico,8372,Juan de Acosta,135,0.4
+8,Atlántico,8421,Luruaco,168,0.5
+8,Atlántico,8433,Malambo,"1,749",4.8
+8,Atlántico,8436,Manatí,123,0.3
+8,Atlántico,8520,Palmar de Varela,153,0.4
+8,Atlántico,8549,Piojó,35,0.1
+8,Atlántico,8558,Polonuevo,133,0.4
+8,Atlántico,8560,Ponedera,163,0.4
+8,Atlántico,8573,Puerto Colombia,414,1.1
+8,Atlántico,8606,Repelón,175,0.5
+8,Atlántico,8634,Sabanagrande,255,0.7
+8,Atlántico,8638,Sabanalarga,715,1.9
+8,Atlántico,8675,Santa Lucía,63,0.2
+8,Atlántico,8685,Santo Tomás,190,0.5
+8,Atlántico,8758,Soledad,"6,167",16.8
+8,Atlántico,8770,Suan,52,0.1
+8,Atlántico,8832,Tubará,93,0.3
+8,Atlántico,8849,Usiacurí,58,0.2
+11,"Bogotá, D. C.",11001,"Bogotá, D.C.","212,196",100
+13,Bolívar,13001,Cartagena de Indias,"19,944",67.2
+13,Bolívar,13006,Achí,215,0.7
+13,Bolívar,13030,Altos del Rosario,75,0.3
+13,Bolívar,13042,Arenal,143,0.5
+13,Bolívar,13052,Arjona,599,2
+13,Bolívar,13062,Arroyohondo,65,0.2
+13,Bolívar,13074,Barranco de Loba,127,0.4
+13,Bolívar,13140,Calamar,169,0.6
+13,Bolívar,13160,Cantagallo,450,1.5
+13,Bolívar,13188,Cicuco,101,0.3
+13,Bolívar,13212,Córdoba,104,0.4
+13,Bolívar,13222,Clemencia,116,0.4
+13,Bolívar,13244,El Carmen de Bolívar,557,1.9
+13,Bolívar,13248,El Guamo,82,0.3
+13,Bolívar,13268,El Peñón,73,0.2
+13,Bolívar,13300,Hatillo de Loba,77,0.3
+13,Bolívar,13430,Magangué,"1,263",4.3
+13,Bolívar,13433,Mahates,239,0.8
+13,Bolívar,13440,Margarita,74,0.2
+13,Bolívar,13442,María La Baja,482,1.6
+13,Bolívar,13458,Montecristo,134,0.5
+13,Bolívar,13468,Mompós,333,1.1
+13,Bolívar,13473,Morales,194,0.7
+13,Bolívar,13490,Norosí,99,0.3
+13,Bolívar,13549,Pinillos,167,0.6
+13,Bolívar,13580,Regidor,86,0.3
+13,Bolívar,13600,Río Viejo,135,0.5
+13,Bolívar,13620,San Cristóbal,38,0.1
+13,Bolívar,13647,San Estanislao,114,0.4
+13,Bolívar,13650,San Fernando,80,0.3
+13,Bolívar,13654,San Jacinto,193,0.7
+13,Bolívar,13655,San Jacinto del Cauca,111,0.4
+13,Bolívar,13657,San Juan Nepomuceno,271,0.9
+13,Bolívar,13667,San Martín de Loba,132,0.4
+13,Bolívar,13670,San Pablo,361,1.2
+13,Bolívar,13673,Santa Catalina,116,0.4
+13,Bolívar,13683,Santa Rosa,146,0.5
+13,Bolívar,13688,Santa Rosa del Sur,324,1.1
+13,Bolívar,13744,Simití,337,1.1
+13,Bolívar,13760,Soplaviento,52,0.2
+13,Bolívar,13780,Talaigua Nuevo,111,0.4
+13,Bolívar,13810,Tiquisio,146,0.5
+13,Bolívar,13836,Turbaco,659,2.2
+13,Bolívar,13838,Turbaná,116,0.4
+13,Bolívar,13873,Villanueva,168,0.6
+13,Bolívar,13894,Zambrano,101,0.3
+15,Boyacá,15001,Tunja,"3,332",14.5
+15,Boyacá,15022,Almeida,17,0.1
+15,Boyacá,15047,Aquitania,314,1.4
+15,Boyacá,15051,Arcabuco,119,0.5
+15,Boyacá,15087,Belén,100,0.4
+15,Boyacá,15090,Berbeo,22,0.1
+15,Boyacá,15092,Betéitiva,18,0.1
+15,Boyacá,15097,Boavita,58,0.3
+15,Boyacá,15104,Boyacá,123,0.5
+15,Boyacá,15106,Briceño,37,0.2
+15,Boyacá,15109,Buenavista,58,0.3
+15,Boyacá,15114,Busbanzá,10,0
+15,Boyacá,15131,Caldas,34,0.1
+15,Boyacá,15135,Campohermoso,36,0.2
+15,Boyacá,15162,Cerinza,30,0.1
+15,Boyacá,15172,Chinavita,35,0.2
+15,Boyacá,15176,Chiquinquirá,896,3.9
+15,Boyacá,15180,Chiscas,36,0.2
+15,Boyacá,15183,Chita,76,0.3
+15,Boyacá,15185,Chitaraque,67,0.3
+15,Boyacá,15187,Chivatá,42,0.2
+15,Boyacá,15189,Ciénega,57,0.3
+15,Boyacá,15204,Cómbita,149,0.6
+15,Boyacá,15212,Coper,39,0.2
+15,Boyacá,15215,Corrales,53,0.2
+15,Boyacá,15218,Covarachía,29,0.1
+15,Boyacá,15223,Cubará,60,0.3
+15,Boyacá,15224,Cucaita,66,0.3
+15,Boyacá,15226,Cuítiva,20,0.1
+15,Boyacá,15232,Chíquiza,93,0.4
+15,Boyacá,15236,Chivor,18,0.1
+15,Boyacá,15238,Duitama,"2,024",8.8
+15,Boyacá,15244,El Cocuy,52,0.2
+15,Boyacá,15248,El Espino,35,0.2
+15,Boyacá,15272,Firavitoba,63,0.3
+15,Boyacá,15276,Floresta,32,0.1
+15,Boyacá,15293,Gachantivá,27,0.1
+15,Boyacá,15296,Gámeza,62,0.3
+15,Boyacá,15299,Garagoa,165,0.7
+15,Boyacá,15317,Guacamayas,15,0.1
+15,Boyacá,15322,Guateque,119,0.5
+15,Boyacá,15325,Guayatá,57,0.2
+15,Boyacá,15332,Güicán de la Sierra,51,0.2
+15,Boyacá,15362,Iza,25,0.1
+15,Boyacá,15367,Jenesano,89,0.4
+15,Boyacá,15368,Jericó,46,0.2
+15,Boyacá,15377,Labranzagrande,38,0.2
+15,Boyacá,15380,La Capilla,35,0.2
+15,Boyacá,15401,La Victoria,28,0.1
+15,Boyacá,15403,La Uvita,33,0.1
+15,Boyacá,15425,Macanal,47,0.2
+15,Boyacá,15442,Maripí,75,0.3
+15,Boyacá,15455,Miraflores,110,0.5
+15,Boyacá,15464,Mongua,53,0.2
+15,Boyacá,15466,Monguí,39,0.2
+15,Boyacá,15469,Moniquirá,292,1.3
+15,Boyacá,15476,Motavita,93,0.4
+15,Boyacá,15480,Muzo,88,0.4
+15,Boyacá,15491,Nobsa,"1,346",5.9
+15,Boyacá,15494,Nuevo Colón,90,0.4
+15,Boyacá,15500,Oicatá,31,0.1
+15,Boyacá,15507,Otanche,88,0.4
+15,Boyacá,15511,Pachavita,38,0.2
+15,Boyacá,15514,Páez,42,0.2
+15,Boyacá,15516,Paipa,557,2.4
+15,Boyacá,15518,Pajarito,24,0.1
+15,Boyacá,15522,Panqueba,16,0.1
+15,Boyacá,15531,Pauna,106,0.5
+15,Boyacá,15533,Paya,20,0.1
+15,Boyacá,15537,Paz de río,64,0.3
+15,Boyacá,15542,Pesca,63,0.3
+15,Boyacá,15550,Pisba,13,0.1
+15,Boyacá,15572,Puerto Boyacá,"2,055",8.9
+15,Boyacá,15580,Quípama,75,0.3
+15,Boyacá,15599,Ramiriquí,104,0.5
+15,Boyacá,15600,Ráquira,142,0.6
+15,Boyacá,15621,Rondón,29,0.1
+15,Boyacá,15632,Saboyá,203,0.9
+15,Boyacá,15638,Sáchica,84,0.4
+15,Boyacá,15646,Samacá,334,1.5
+15,Boyacá,15660,San Eduardo,21,0.1
+15,Boyacá,15664,San José de Pare,57,0.2
+15,Boyacá,15667,San Luis de Gaceno,57,0.2
+15,Boyacá,15673,San Mateo,38,0.2
+15,Boyacá,15676,San Miguel de Sema,43,0.2
+15,Boyacá,15681,San Pablo de Borbur,78,0.3
+15,Boyacá,15686,Santana,78,0.3
+15,Boyacá,15690,Santa María,546,2.4
+15,Boyacá,15693,Santa Rosa de Viterbo,104,0.5
+15,Boyacá,15696,Santa Sofía,59,0.3
+15,Boyacá,15720,Sativanorte,22,0.1
+15,Boyacá,15723,Sativasur,27,0.1
+15,Boyacá,15740,Siachoque,149,0.7
+15,Boyacá,15753,Soatá,71,0.3
+15,Boyacá,15755,Socotá,141,0.6
+15,Boyacá,15757,Socha,137,0.6
+15,Boyacá,15759,Sogamoso,"2,675",11.6
+15,Boyacá,15761,Somondoco,38,0.2
+15,Boyacá,15762,Sora,29,0.1
+15,Boyacá,15763,Sotaquirá,94,0.4
+15,Boyacá,15764,Soracá,133,0.6
+15,Boyacá,15774,Susacón,24,0.1
+15,Boyacá,15776,Sutamarchán,79,0.3
+15,Boyacá,15778,Sutatenza,58,0.3
+15,Boyacá,15790,Tasco,78,0.3
+15,Boyacá,15798,Tenza,57,0.2
+15,Boyacá,15804,Tibaná,133,0.6
+15,Boyacá,15806,Tibasosa,681,3
+15,Boyacá,15808,Tinjacá,34,0.1
+15,Boyacá,15810,Tipacoque,27,0.1
+15,Boyacá,15814,Toca,177,0.8
+15,Boyacá,15816,Togüí,56,0.2
+15,Boyacá,15820,Tópaga,57,0.2
+15,Boyacá,15822,Tota,68,0.3
+15,Boyacá,15832,Tununguá,65,0.3
+15,Boyacá,15835,Turmequé,83,0.4
+15,Boyacá,15837,Tuta,631,2.7
+15,Boyacá,15839,Tutazá,51,0.2
+15,Boyacá,15842,Úmbita,100,0.4
+15,Boyacá,15861,Ventaquemada,252,1.1
+15,Boyacá,15407,Villa de Leyva,217,0.9
+15,Boyacá,15879,Viracachá,40,0.2
+15,Boyacá,15897,Zetaquira,53,0.2
+17,Caldas,17001,Manizales,"6,518",48.2
+17,Caldas,17013,Aguadas,270,2
+17,Caldas,17042,Anserma,384,2.8
+17,Caldas,17050,Aranzazu,126,0.9
+17,Caldas,17088,Belalcázar,157,1.2
+17,Caldas,17174,Chinchiná,"1,171",8.6
+17,Caldas,17272,Filadelfia,102,0.8
+17,Caldas,17380,La Dorada,"1,046",7.7
+17,Caldas,17388,La Merced,53,0.4
+17,Caldas,17433,Manzanares,187,1.4
+17,Caldas,17442,Marmato,252,1.9
+17,Caldas,17444,Marquetalia,122,0.9
+17,Caldas,17446,Marulanda,37,0.3
+17,Caldas,17486,Neira,278,2.1
+17,Caldas,17495,Norcasia,68,0.5
+17,Caldas,17513,Pácora,200,1.5
+17,Caldas,17524,Palestina,262,1.9
+17,Caldas,17541,Pensilvania,206,1.5
+17,Caldas,17614,Riosucio,427,3.2
+17,Caldas,17616,Risaralda,197,1.5
+17,Caldas,17653,Salamina,196,1.4
+17,Caldas,17662,Samaná,212,1.6
+17,Caldas,17665,San José,94,0.7
+17,Caldas,17777,Supía,256,1.9
+17,Caldas,17867,Victoria,87,0.6
+17,Caldas,17873,Villamaría,482,3.6
+17,Caldas,17877,Viterbo,150,1.1
+18,Caquetá,18001,Florencia,"1,784",48.5
+18,Caquetá,18029,Albania,51,1.4
+18,Caquetá,18094,Belén de los Andaquíes,78,2.1
+18,Caquetá,18150,Cartagena del Chairá,207,5.6
+18,Caquetá,18205,Curillo,65,1.8
+18,Caquetá,18247,El Doncello,133,3.6
+18,Caquetá,18256,El Paujíl,99,2.7
+18,Caquetá,18410,La Montañita,90,2.5
+18,Caquetá,18460,Milán,69,1.9
+18,Caquetá,18479,Morelia,30,0.8
+18,Caquetá,18592,Puerto Rico,248,6.7
+18,Caquetá,18610,San José del Fragua,68,1.9
+18,Caquetá,18753,San Vicente del Caguán,569,15.5
+18,Caquetá,18756,Solano,71,1.9
+18,Caquetá,18785,Solita,46,1.3
+18,Caquetá,18860,Valparaíso,70,1.9
+19,Cauca,19001,Popayán,"4,175",27.3
+19,Cauca,19022,Almaguer,107,0.7
+19,Cauca,19050,Argelia,112,0.7
+19,Cauca,19075,Balboa,190,1.2
+19,Cauca,19100,Bolívar,278,1.8
+19,Cauca,19110,Buenos Aires,310,2
+19,Cauca,19130,Cajibío,271,1.8
+19,Cauca,19137,Caldono,208,1.4
+19,Cauca,19142,Caloto,"1,713",11.2
+19,Cauca,19212,Corinto,237,1.6
+19,Cauca,19256,El Tambo,443,2.9
+19,Cauca,19290,Florencia,45,0.3
+19,Cauca,19300,Guachené,143,0.9
+19,Cauca,19318,Guapí,249,1.6
+19,Cauca,19355,Inzá,163,1.1
+19,Cauca,19364,Jambaló,84,0.5
+19,Cauca,19392,La Sierra,84,0.6
+19,Cauca,19397,La Vega,184,1.2
+19,Cauca,19418,López de Micay,74,0.5
+19,Cauca,19450,Mercaderes,125,0.8
+19,Cauca,19455,Miranda,799,5.2
+19,Cauca,19473,Morales,215,1.4
+19,Cauca,19513,Padilla,111,0.7
+19,Cauca,19517,Páez,239,1.6
+19,Cauca,19532,Patía,249,1.6
+19,Cauca,19533,Piamonte,72,0.5
+19,Cauca,19548,Piendamó - Tunía,362,2.4
+19,Cauca,19573,Puerto Tejada,630,4.1
+19,Cauca,19585,Puracé,89,0.6
+19,Cauca,19622,Rosas,75,0.5
+19,Cauca,19693,San Sebastián,58,0.4
+19,Cauca,19698,Santander de Quilichao,"1,585",10.4
+19,Cauca,19701,Santa Rosa,38,0.2
+19,Cauca,19743,Silvia,178,1.2
+19,Cauca,19760,Sotara,93,0.6
+19,Cauca,19780,Suárez,210,1.4
+19,Cauca,19785,Sucre,59,0.4
+19,Cauca,19807,Timbío,251,1.6
+19,Cauca,19809,Timbiquí,126,0.8
+19,Cauca,19821,Toribío,164,1.1
+19,Cauca,19824,Totoró,111,0.7
+19,Cauca,19845,Villa Rica,386,2.5
+20,Cesar,20001,Valledupar,"4,939",26
+20,Cesar,20011,Aguachica,728,3.8
+20,Cesar,20013,Agustín Codazzi,"2,296",12.1
+20,Cesar,20032,Astrea,154,0.8
+20,Cesar,20045,Becerril,"1,953",10.3
+20,Cesar,20060,Bosconia,271,1.4
+20,Cesar,20175,Chimichagua,199,1
+20,Cesar,20178,Chiriguaná,222,1.2
+20,Cesar,20228,Curumaní,202,1.1
+20,Cesar,20238,El Copey,321,1.7
+20,Cesar,20250,El Paso,797,4.2
+20,Cesar,20295,Gamarra,117,0.6
+20,Cesar,20310,González,37,0.2
+20,Cesar,20383,La Gloria,214,1.1
+20,Cesar,20400,La Jagua de Ibirico,"4,301",22.6
+20,Cesar,20443,Manaure Balcón del Cesar,79,0.4
+20,Cesar,20517,Pailitas,139,0.7
+20,Cesar,20550,Pelaya,152,0.8
+20,Cesar,20570,Pueblo Bello,175,0.9
+20,Cesar,20614,Río de Oro,161,0.8
+20,Cesar,20621,La Paz,249,1.3
+20,Cesar,20710,San Alberto,439,2.3
+20,Cesar,20750,San Diego,136,0.7
+20,Cesar,20770,San Martín,616,3.2
+20,Cesar,20787,Tamalameque,122,0.6
+23,Córdoba,23001,Montería,"4,452",30.4
+23,Córdoba,23068,Ayapel,342,2.3
+23,Córdoba,23079,Buenavista,144,1
+23,Córdoba,23090,Canalete,124,0.8
+23,Córdoba,23162,Cereté,777,5.3
+23,Córdoba,23168,Chimá,88,0.6
+23,Córdoba,23182,Chinú,240,1.6
+23,Córdoba,23189,Ciénaga de Oro,665,4.5
+23,Córdoba,23300,Cotorra,81,0.6
+23,Córdoba,23350,La Apartada,90,0.6
+23,Córdoba,23417,Lorica,965,6.6
+23,Córdoba,23419,Los Córdobas,125,0.9
+23,Córdoba,23464,Momil,70,0.5
+23,Córdoba,23466,Montelíbano,"1,628",11.1
+23,Córdoba,23500,Moñitos,147,1
+23,Córdoba,23555,Planeta Rica,475,3.2
+23,Córdoba,23570,Pueblo Nuevo,221,1.5
+23,Córdoba,23574,Puerto Escondido,157,1.1
+23,Córdoba,23580,Puerto Libertador,365,2.5
+23,Córdoba,23586,Purísima de la Concepción,64,0.4
+23,Córdoba,23660,Sahagún,956,6.5
+23,Córdoba,23670,San Andrés de Sotavento,187,1.3
+23,Córdoba,23672,San Antero,147,1
+23,Córdoba,23675,San Bernardo del Viento,149,1
+23,Córdoba,23678,San Carlos,175,1.2
+23,Córdoba,23682,San José de Uré,52,0.4
+23,Córdoba,23686,San Pelayo,208,1.4
+23,Córdoba,23807,Tierralta,"1,108",7.6
+23,Córdoba,23815,Tuchín,137,0.9
+23,Córdoba,23855,Valencia,293,2
+25,Cundinamarca,25001,Agua de Dios,101,0.2
+25,Cundinamarca,25019,Albán,121,0.2
+25,Cundinamarca,25035,Anapoima,343,0.7
+25,Cundinamarca,25040,Anolaima,158,0.3
+25,Cundinamarca,25053,Arbeláez,198,0.4
+25,Cundinamarca,25086,Beltrán,22,0
+25,Cundinamarca,25095,Bituima,41,0.1
+25,Cundinamarca,25099,Bojacá,141,0.3
+25,Cundinamarca,25120,Cabrera,113,0.2
+25,Cundinamarca,25123,Cachipay,179,0.4
+25,Cundinamarca,25126,Cajicá,"1,464",2.9
+25,Cundinamarca,25148,Caparrapí,146,0.3
+25,Cundinamarca,25151,Cáqueza,284,0.6
+25,Cundinamarca,25154,Carmen de Carupa,106,0.2
+25,Cundinamarca,25168,Chaguaní,50,0.1
+25,Cundinamarca,25175,Chía,"2,839",5.7
+25,Cundinamarca,25178,Chipaque,61,0.1
+25,Cundinamarca,25181,Choachí,122,0.2
+25,Cundinamarca,25183,Chocontá,419,0.8
+25,Cundinamarca,25200,Cogua,585,1.2
+25,Cundinamarca,25214,Cota,"2,637",5.3
+25,Cundinamarca,25224,Cucunubá,210,0.4
+25,Cundinamarca,25245,El Colegio,313,0.6
+25,Cundinamarca,25258,El Peñón,58,0.1
+25,Cundinamarca,25260,El Rosal,214,0.4
+25,Cundinamarca,25269,Facatativá,"2,763",5.6
+25,Cundinamarca,25279,Fómeque,295,0.6
+25,Cundinamarca,25281,Fosca,120,0.2
+25,Cundinamarca,25286,Funza,"2,449",4.9
+25,Cundinamarca,25288,Fúquene,75,0.2
+25,Cundinamarca,25290,Fusagasugá,"1,650",3.3
+25,Cundinamarca,25293,Gachalá,40,0.1
+25,Cundinamarca,25295,Gachancipá,200,0.4
+25,Cundinamarca,25297,Gachetá,91,0.2
+25,Cundinamarca,25299,Gama,27,0.1
+25,Cundinamarca,25307,Girardot,"1,485",3
+25,Cundinamarca,25312,Granada,103,0.2
+25,Cundinamarca,25317,Guachetá,232,0.5
+25,Cundinamarca,25320,Guaduas,379,0.8
+25,Cundinamarca,25322,Guasca,148,0.3
+25,Cundinamarca,25324,Guataquí,21,0
+25,Cundinamarca,25326,Guatavita,122,0.2
+25,Cundinamarca,25328,Guayabal de Síquima,71,0.1
+25,Cundinamarca,25335,Guayabetal,56,0.1
+25,Cundinamarca,25339,Gutiérrez,58,0.1
+25,Cundinamarca,25368,Jerusalén,43,0.1
+25,Cundinamarca,25372,Junín,74,0.1
+25,Cundinamarca,25377,La Calera,479,1
+25,Cundinamarca,25386,La Mesa,906,1.8
+25,Cundinamarca,25394,La Palma,141,0.3
+25,Cundinamarca,25398,La Peña,65,0.1
+25,Cundinamarca,25402,La Vega,259,0.5
+25,Cundinamarca,25407,Lenguazaque,272,0.5
+25,Cundinamarca,25426,Machetá,72,0.1
+25,Cundinamarca,25430,Madrid,"1,433",2.9
+25,Cundinamarca,25436,Manta,51,0.1
+25,Cundinamarca,25438,Medina,90,0.2
+25,Cundinamarca,25473,Mosquera,"2,093",4.2
+25,Cundinamarca,25483,Nariño,22,0
+25,Cundinamarca,25486,Nemocón,124,0.3
+25,Cundinamarca,25488,Nilo,180,0.4
+25,Cundinamarca,25489,Nimaima,41,0.1
+25,Cundinamarca,25491,Nocaima,81,0.2
+25,Cundinamarca,25506,Venecia,61,0.1
+25,Cundinamarca,25513,Pacho,269,0.5
+25,Cundinamarca,25518,Paime,59,0.1
+25,Cundinamarca,25524,Pandi,100,0.2
+25,Cundinamarca,25530,Paratebueno,226,0.5
+25,Cundinamarca,25535,Pasca,169,0.3
+25,Cundinamarca,25572,Puerto Salgar,205,0.4
+25,Cundinamarca,25580,Pulí,46,0.1
+25,Cundinamarca,25592,Quebradanegra,55,0.1
+25,Cundinamarca,25594,Quetame,77,0.2
+25,Cundinamarca,25596,Quipile,146,0.3
+25,Cundinamarca,25599,Apulo,93,0.2
+25,Cundinamarca,25612,Ricaurte,216,0.4
+25,Cundinamarca,25645,San Antonio del Tequendama,165,0.3
+25,Cundinamarca,25649,San Bernardo,241,0.5
+25,Cundinamarca,25653,San Cayetano,140,0.3
+25,Cundinamarca,25658,San Francisco,111,0.2
+25,Cundinamarca,25662,San Juan de Rioseco,198,0.4
+25,Cundinamarca,25718,Sasaima,198,0.4
+25,Cundinamarca,25736,Sesquilé,215,0.4
+25,Cundinamarca,25740,Sibaté,904,1.8
+25,Cundinamarca,25743,Silvania,273,0.5
+25,Cundinamarca,25745,Simijaca,147,0.3
+25,Cundinamarca,25754,Soacha,"4,821",9.7
+25,Cundinamarca,25758,Sopó,922,1.9
+25,Cundinamarca,25769,Subachoque,178,0.4
+25,Cundinamarca,25772,Suesca,234,0.5
+25,Cundinamarca,25777,Supatá,65,0.1
+25,Cundinamarca,25779,Susa,99,0.2
+25,Cundinamarca,25781,Sutatausa,153,0.3
+25,Cundinamarca,25785,Tabio,227,0.5
+25,Cundinamarca,25793,Tausa,655,1.3
+25,Cundinamarca,25797,Tena,124,0.2
+25,Cundinamarca,25799,Tenjo,"1,151",2.3
+25,Cundinamarca,25805,Tibacuy,55,0.1
+25,Cundinamarca,25807,Tibirita,35,0.1
+25,Cundinamarca,25815,Tocaima,198,0.4
+25,Cundinamarca,25817,Tocancipá,"3,957",8
+25,Cundinamarca,25823,Topaipí,54,0.1
+25,Cundinamarca,25839,Ubalá,771,1.6
+25,Cundinamarca,25841,Ubaque,186,0.4
+25,Cundinamarca,25843,Villa de San Diego de Ubaté,394,0.8
+25,Cundinamarca,25845,Une,247,0.5
+25,Cundinamarca,25851,Útica,44,0.1
+25,Cundinamarca,25862,Vergara,105,0.2
+25,Cundinamarca,25867,Vianí,65,0.1
+25,Cundinamarca,25871,Villagómez,21,0
+25,Cundinamarca,25873,Villapinzón,626,1.3
+25,Cundinamarca,25875,Villeta,312,0.6
+25,Cundinamarca,25878,Viotá,241,0.5
+25,Cundinamarca,25885,Yacopí,172,0.3
+25,Cundinamarca,25898,Zipacón,89,0.2
+25,Cundinamarca,25899,Zipaquirá,"1,430",2.9
+27,Chocó,27001,Quibdó,"1,335",35
+27,Chocó,27006,Acandí,70,1.8
+27,Chocó,27025,Alto Baudó,103,2.7
+27,Chocó,27050,Atrato,44,1.2
+27,Chocó,27073,Bagadó,138,3.6
+27,Chocó,27075,Bahía Solano,33,0.9
+27,Chocó,27077,Bajo Baudó,57,1.5
+27,Chocó,27099,Bojayá,61,1.6
+27,Chocó,27135,El Cantón del San Pablo,26,0.7
+27,Chocó,27150,Carmen del Darién,179,4.7
+27,Chocó,27160,Cértegui,29,0.8
+27,Chocó,27205,Condoto,146,3.8
+27,Chocó,27245,El Carmen de Atrato,86,2.2
+27,Chocó,27250,El Litoral del San Juan,35,0.9
+27,Chocó,27361,Istmina,441,11.6
+27,Chocó,27372,Juradó,15,0.4
+27,Chocó,27413,Lloró,49,1.3
+27,Chocó,27425,Medio Atrato,70,1.8
+27,Chocó,27430,Medio Baudó,59,1.5
+27,Chocó,27450,Medio San Juan,46,1.2
+27,Chocó,27491,Nóvita,51,1.3
+27,Chocó,27495,Nuquí,33,0.9
+27,Chocó,27580,Río Iró,25,0.7
+27,Chocó,27600,Río Quito,41,1.1
+27,Chocó,27615,Riosucio,276,7.2
+27,Chocó,27660,San José del Palmar,29,0.8
+27,Chocó,27745,Sipí,15,0.4
+27,Chocó,27787,Tadó,201,5.3
+27,Chocó,27800,Unguía,93,2.4
+27,Chocó,27810,Unión Panamericana,31,0.8
+41,Huila,41001,Neiva,"5,267",36.8
+41,Huila,41006,Acevedo,333,2.3
+41,Huila,41013,Agrado,93,0.6
+41,Huila,41016,Aipe,439,3.1
+41,Huila,41020,Algeciras,251,1.8
+41,Huila,41026,Altamira,54,0.4
+41,Huila,41078,Baraya,88,0.6
+41,Huila,41132,Campoalegre,447,3.1
+41,Huila,41206,Colombia,102,0.7
+41,Huila,41244,Elías,42,0.3
+41,Huila,41298,Garzón,644,4.5
+41,Huila,41306,Gigante,421,2.9
+41,Huila,41319,Guadalupe,180,1.3
+41,Huila,41349,Hobo,69,0.5
+41,Huila,41357,Íquira,113,0.8
+41,Huila,41359,Isnos,211,1.5
+41,Huila,41378,La Argentina,113,0.8
+41,Huila,41396,La Plata,552,3.9
+41,Huila,41483,Nátaga,61,0.4
+41,Huila,41503,Oporapa,104,0.7
+41,Huila,41518,Paicol,118,0.8
+41,Huila,41524,Palermo,530,3.7
+41,Huila,41530,Palestina,132,0.9
+41,Huila,41548,Pital,140,1
+41,Huila,41551,Pitalito,"1,518",10.6
+41,Huila,41615,Rivera,315,2.2
+41,Huila,41660,Saladoblanco,116,0.8
+41,Huila,41668,San Agustín,279,2
+41,Huila,41676,Santa María,125,0.9
+41,Huila,41770,Suaza,216,1.5
+41,Huila,41791,Tarqui,158,1.1
+41,Huila,41797,Tesalia,127,0.9
+41,Huila,41799,Tello,177,1.2
+41,Huila,41801,Teruel,91,0.6
+41,Huila,41807,Timaná,194,1.4
+41,Huila,41872,Villavieja,97,0.7
+41,Huila,41885,Yaguará,381,2.7
+44,La Guajira,44001,Riohacha,"2,125",20.4
+44,La Guajira,44035,Albania,"2,224",21.3
+44,La Guajira,44078,Barrancas,"2,110",20.2
+44,La Guajira,44090,Dibulla,322,3.1
+44,La Guajira,44098,Distracción,60,0.6
+44,La Guajira,44110,El Molino,44,0.4
+44,La Guajira,44279,Fonseca,174,1.7
+44,La Guajira,44378,Hatonuevo,783,7.5
+44,La Guajira,44420,La Jagua del Pilar,24,0.2
+44,La Guajira,44430,Maicao,"1,165",11.2
+44,La Guajira,44560,Manaure,331,3.2
+44,La Guajira,44650,San Juan del Cesar,210,2
+44,La Guajira,44847,Uribia,665,6.4
+44,La Guajira,44855,Urumita,68,0.7
+44,La Guajira,44874,Villanueva,117,1.1
+47,Magdalena,47001,Santa Marta,"5,379",45.6
+47,Magdalena,47030,Algarrobo,97,0.8
+47,Magdalena,47053,Aracataca,279,2.4
+47,Magdalena,47058,Ariguaní,248,2.1
+47,Magdalena,47161,Cerro de San Antonio,47,0.4
+47,Magdalena,47170,Chivolo,80,0.7
+47,Magdalena,47189,Ciénaga,"1,114",9.5
+47,Magdalena,47205,Concordia,63,0.5
+47,Magdalena,47245,El Banco,301,2.6
+47,Magdalena,47258,El Piñón,93,0.8
+47,Magdalena,47268,El Retén,252,2.1
+47,Magdalena,47288,Fundación,416,3.5
+47,Magdalena,47318,Guamal,156,1.3
+47,Magdalena,47460,Nueva Granada,127,1.1
+47,Magdalena,47541,Pedraza,320,2.7
+47,Magdalena,47545,Pijiño del Carmen,92,0.8
+47,Magdalena,47551,Pivijay,252,2.1
+47,Magdalena,47555,Plato,399,3.4
+47,Magdalena,47570,Puebloviejo,154,1.3
+47,Magdalena,47605,Remolino,52,0.4
+47,Magdalena,47660,Sabanas de San Ángel,99,0.8
+47,Magdalena,47675,Salamina,58,0.5
+47,Magdalena,47692,San Sebastián de Buenavista,129,1.1
+47,Magdalena,47703,San Zenón,85,0.7
+47,Magdalena,47707,Santa Ana,156,1.3
+47,Magdalena,47720,Santa Bárbara de Pinto,98,0.8
+47,Magdalena,47745,Sitionuevo,158,1.3
+47,Magdalena,47798,Tenerife,68,0.6
+47,Magdalena,47960,Zapayán,62,0.5
+47,Magdalena,47980,Zona Bananera,951,8.1
+50,Meta,50001,Villavicencio,"7,393",25.5
+50,Meta,50006,Acacías,"4,134",14.2
+50,Meta,50110,Barranca de Upía,160,0.6
+50,Meta,50124,Cabuyaro,787,2.7
+50,Meta,50150,Castilla la Nueva,"2,518",8.7
+50,Meta,50223,Cubarral,64,0.2
+50,Meta,50226,Cumaral,364,1.3
+50,Meta,50245,El Calvario,18,0.1
+50,Meta,50251,El Castillo,91,0.3
+50,Meta,50270,El Dorado,43,0.1
+50,Meta,50287,Fuentedeoro,351,1.2
+50,Meta,50313,Granada,737,2.5
+50,Meta,50318,Guamal,781,2.7
+50,Meta,50325,Mapiripán,152,0.5
+50,Meta,50330,Mesetas,158,0.5
+50,Meta,50350,La Macarena,235,0.8
+50,Meta,50370,Uribe,136,0.5
+50,Meta,50400,Lejanías,214,0.7
+50,Meta,50450,Puerto Concordia,229,0.8
+50,Meta,50568,Puerto Gaitán,"7,366",25.4
+50,Meta,50573,Puerto López,"1,066",3.7
+50,Meta,50577,Puerto Lleras,205,0.7
+50,Meta,50590,Puerto Rico,348,1.2
+50,Meta,50606,Restrepo,179,0.6
+50,Meta,50680,San Carlos de Guaroa,393,1.4
+50,Meta,50683,San Juan de Arama,181,0.6
+50,Meta,50686,San Juanito,19,0.1
+50,Meta,50689,San Martín,416,1.4
+50,Meta,50711,Vistahermosa,304,1
+52,Nariño,52001,Pasto,"5,061",37.9
+52,Nariño,52019,Albán,137,1
+52,Nariño,52022,Aldana,44,0.3
+52,Nariño,52036,Ancuyá,40,0.3
+52,Nariño,52051,Arboleda,55,0.4
+52,Nariño,52079,Barbacoas,244,1.8
+52,Nariño,52083,Belén,41,0.3
+52,Nariño,52110,Buesaco,169,1.3
+52,Nariño,52203,Colón,71,0.5
+52,Nariño,52207,Consacá,76,0.6
+52,Nariño,52210,Contadero,50,0.4
+52,Nariño,52215,Córdoba,91,0.7
+52,Nariño,52224,Cuaspud,51,0.4
+52,Nariño,52227,Cumbal,145,1.1
+52,Nariño,52233,Cumbitara,52,0.4
+52,Nariño,52240,Chachagüí,110,0.8
+52,Nariño,52250,El Charco,136,1
+52,Nariño,52254,El Peñol,59,0.4
+52,Nariño,52256,El Rosario,53,0.4
+52,Nariño,52258,El Tablón de Gómez,86,0.6
+52,Nariño,52260,El Tambo,86,0.6
+52,Nariño,52287,Funes,37,0.3
+52,Nariño,52317,Guachucal,136,1
+52,Nariño,52320,Guaitarilla,84,0.6
+52,Nariño,52323,Gualmatán,69,0.5
+52,Nariño,52352,Iles,74,0.6
+52,Nariño,52354,Imués,45,0.3
+52,Nariño,52356,Ipiales,"1,167",8.7
+52,Nariño,52378,La Cruz,77,0.6
+52,Nariño,52381,La Florida,78,0.6
+52,Nariño,52385,La Llanada,29,0.2
+52,Nariño,52390,La Tola,35,0.3
+52,Nariño,52399,La Unión,206,1.5
+52,Nariño,52405,Leiva,61,0.5
+52,Nariño,52411,Linares,59,0.4
+52,Nariño,52418,Los Andes,72,0.5
+52,Nariño,52427,Magüí,98,0.7
+52,Nariño,52435,Mallama,40,0.3
+52,Nariño,52473,Mosquera,343,2.6
+52,Nariño,52480,Nariño,41,0.3
+52,Nariño,52490,Olaya Herrera,90,0.7
+52,Nariño,52506,Ospina,62,0.5
+52,Nariño,52520,Francisco Pizarro,56,0.4
+52,Nariño,52540,Policarpa,69,0.5
+52,Nariño,52560,Potosí,84,0.6
+52,Nariño,52565,Providencia,37,0.3
+52,Nariño,52573,Puerres,53,0.4
+52,Nariño,52585,Pupiales,178,1.3
+52,Nariño,52612,Ricaurte,65,0.5
+52,Nariño,52621,Roberto Payán,69,0.5
+52,Nariño,52678,Samaniego,188,1.4
+52,Nariño,52683,Sandoná,132,1
+52,Nariño,52685,San Bernardo,66,0.5
+52,Nariño,52687,San Lorenzo,141,1.1
+52,Nariño,52693,San Pablo,165,1.2
+52,Nariño,52694,San Pedro de Cartago,46,0.3
+52,Nariño,52696,Santa Bárbara,91,0.7
+52,Nariño,52699,Santacruz,70,0.5
+52,Nariño,52720,Sapuyes,64,0.5
+52,Nariño,52786,Taminango,105,0.8
+52,Nariño,52788,Tangua,76,0.6
+52,Nariño,52835,San Andrés de Tumaco,"1,386",10.4
+52,Nariño,52838,Túquerres,387,2.9
+52,Nariño,52885,Yacuanquer,81,0.6
+54,Norte De Santander,54001,Cúcuta,"7,726",57.3
+54,Norte De Santander,54003,Ábrego,204,1.5
+54,Norte De Santander,54051,Arboledas,56,0.4
+54,Norte De Santander,54099,Bochalema,93,0.7
+54,Norte De Santander,54109,Bucarasica,42,0.3
+54,Norte De Santander,54125,Cácota,19,0.1
+54,Norte De Santander,54128,Cáchira,69,0.5
+54,Norte De Santander,54172,Chinácota,152,1.1
+54,Norte De Santander,54174,Chitagá,66,0.5
+54,Norte De Santander,54206,Convención,99,0.7
+54,Norte De Santander,54223,Cucutilla,56,0.4
+54,Norte De Santander,54239,Durania,47,0.3
+54,Norte De Santander,54245,El Carmen,112,0.8
+54,Norte De Santander,54250,El Tarra,72,0.5
+54,Norte De Santander,54261,El Zulia,379,2.8
+54,Norte De Santander,54313,Gramalote,34,0.3
+54,Norte De Santander,54344,Hacarí,64,0.5
+54,Norte De Santander,54347,Herrán,21,0.2
+54,Norte De Santander,54377,Labateca,44,0.3
+54,Norte De Santander,54385,La Esperanza,125,0.9
+54,Norte De Santander,54398,La Playa,68,0.5
+54,Norte De Santander,54405,Los Patios,540,4
+54,Norte De Santander,54418,Lourdes,44,0.3
+54,Norte De Santander,54480,Mutiscua,40,0.3
+54,Norte De Santander,54498,Ocaña,765,5.7
+54,Norte De Santander,54518,Pamplona,337,2.5
+54,Norte De Santander,54520,Pamplonita,44,0.3
+54,Norte De Santander,54553,Puerto Santander,73,0.5
+54,Norte De Santander,54599,Ragonvalia,44,0.3
+54,Norte De Santander,54660,Salazar,76,0.6
+54,Norte De Santander,54670,San Calixto,83,0.6
+54,Norte De Santander,54673,San Cayetano,164,1.2
+54,Norte De Santander,54680,Santiago,23,0.2
+54,Norte De Santander,54720,Sardinata,293,2.2
+54,Norte De Santander,54743,Silos,55,0.4
+54,Norte De Santander,54800,Teorama,110,0.8
+54,Norte De Santander,54810,Tibú,498,3.7
+54,Norte De Santander,54820,Toledo,115,0.9
+54,Norte De Santander,54871,Villa Caro,33,0.2
+54,Norte De Santander,54874,Villa del Rosario,596,4.4
+63,Quindío,63001,Armenia,"3,856",53.8
+63,Quindío,63111,Buenavista,68,0.9
+63,Quindío,63130,Calarcá,690,9.6
+63,Quindío,63190,Circasia,299,4.2
+63,Quindío,63212,Córdoba,74,1
+63,Quindío,63272,Filandia,206,2.9
+63,Quindío,63302,Génova,111,1.5
+63,Quindío,63401,La Tebaida,500,7
+63,Quindío,63470,Montenegro,587,8.2
+63,Quindío,63548,Pijao,132,1.8
+63,Quindío,63594,Quimbaya,512,7.1
+63,Quindío,63690,Salento,130,1.8
+66,Risaralda,66001,Pereira,"7,974",58.5
+66,Risaralda,66045,Apía,190,1.4
+66,Risaralda,66075,Balboa,272,2
+66,Risaralda,66088,Belén de Umbría,340,2.5
+66,Risaralda,66170,Dosquebradas,"2,519",18.5
+66,Risaralda,66318,Guática,157,1.2
+66,Risaralda,66383,La Celia,103,0.8
+66,Risaralda,66400,La Virginia,318,2.3
+66,Risaralda,66440,Marsella,248,1.8
+66,Risaralda,66456,Mistrató,143,1.1
+66,Risaralda,66572,Pueblo Rico,108,0.8
+66,Risaralda,66594,Quinchía,267,2
+66,Risaralda,66682,Santa Rosa de Cabal,783,5.7
+66,Risaralda,66687,Santuario,210,1.5
+68,Santander,68001,Bucaramanga,"12,944",26.3
+68,Santander,68013,Aguada,15,0
+68,Santander,68020,Albania,58,0.1
+68,Santander,68051,Aratoca,220,0.4
+68,Santander,68077,Barbosa,467,0.9
+68,Santander,68079,Barichara,116,0.2
+68,Santander,68081,Barrancabermeja,"12,597",25.6
+68,Santander,68092,Betulia,156,0.3
+68,Santander,68101,Bolívar,151,0.3
+68,Santander,68121,Cabrera,22,0
+68,Santander,68132,California,19,0
+68,Santander,68147,Capitanejo,61,0.1
+68,Santander,68152,Carcasí,46,0.1
+68,Santander,68160,Cepitá,17,0
+68,Santander,68162,Cerrito,54,0.1
+68,Santander,68167,Charalá,132,0.3
+68,Santander,68169,Charta,30,0.1
+68,Santander,68176,Chima,45,0.1
+68,Santander,68179,Chipatá,42,0.1
+68,Santander,68190,Cimitarra,726,1.5
+68,Santander,68207,Concepción,61,0.1
+68,Santander,68209,Confines,42,0.1
+68,Santander,68211,Contratación,35,0.1
+68,Santander,68217,Coromoro,68,0.1
+68,Santander,68229,Curití,147,0.3
+68,Santander,68235,El Carmen de Chucurí,215,0.4
+68,Santander,68245,El Guacamayo,24,0
+68,Santander,68250,El Peñón,38,0.1
+68,Santander,68255,El Playón,140,0.3
+68,Santander,68264,Encino,25,0.1
+68,Santander,68266,Enciso,31,0.1
+68,Santander,68271,Florián,73,0.1
+68,Santander,68276,Floridablanca,"3,959",8
+68,Santander,68296,Galán,34,0.1
+68,Santander,68298,Gámbita,44,0.1
+68,Santander,68307,Girón,"3,822",7.8
+68,Santander,68318,Guaca,69,0.1
+68,Santander,68320,Guadalupe,59,0.1
+68,Santander,68322,Guapotá,32,0.1
+68,Santander,68324,Guavatá,45,0.1
+68,Santander,68327,Güepsa,39,0.1
+68,Santander,68344,Hato,29,0.1
+68,Santander,68368,Jesús María,35,0.1
+68,Santander,68370,Jordán,11,0
+68,Santander,68377,La Belleza,73,0.1
+68,Santander,68385,Landázuri,173,0.4
+68,Santander,68397,La Paz,48,0.1
+68,Santander,68406,Lebrija,"1,771",3.6
+68,Santander,68418,Los Santos,306,0.6
+68,Santander,68425,Macaravita,21,0
+68,Santander,68432,Málaga,201,0.4
+68,Santander,68444,Matanza,70,0.1
+68,Santander,68464,Mogotes,110,0.2
+68,Santander,68468,Molagavita,47,0.1
+68,Santander,68498,Ocamonte,56,0.1
+68,Santander,68500,Oiba,122,0.2
+68,Santander,68502,Onzaga,44,0.1
+68,Santander,68522,Palmar,23,0
+68,Santander,68524,Palmas del Socorro,51,0.1
+68,Santander,68533,Páramo,110,0.2
+68,Santander,68547,Piedecuesta,"2,579",5.2
+68,Santander,68549,Pinchote,88,0.2
+68,Santander,68572,Puente Nacional,168,0.3
+68,Santander,68573,Puerto Parra,106,0.2
+68,Santander,68575,Puerto Wilches,831,1.7
+68,Santander,68615,Rionegro,"1,429",2.9
+68,Santander,68655,Sabana de Torres,664,1.4
+68,Santander,68669,San Andrés,87,0.2
+68,Santander,68673,San Benito,42,0.1
+68,Santander,68679,San Gil,726,1.5
+68,Santander,68682,San Joaquín,23,0
+68,Santander,68684,San José de Miranda,31,0.1
+68,Santander,68686,San Miguel,23,0
+68,Santander,68689,San Vicente de Chucurí,603,1.2
+68,Santander,68705,Santa Bárbara,40,0.1
+68,Santander,68720,Santa Helena del Opón,43,0.1
+68,Santander,68745,Simacota,95,0.2
+68,Santander,68755,Socorro,441,0.9
+68,Santander,68770,Suaita,171,0.3
+68,Santander,68773,Sucre,73,0.1
+68,Santander,68780,Suratá,31,0.1
+68,Santander,68820,Tona,140,0.3
+68,Santander,68855,Valle de San José,99,0.2
+68,Santander,68861,Vélez,235,0.5
+68,Santander,68867,Vetas,26,0.1
+68,Santander,68872,Villanueva,75,0.2
+68,Santander,68895,Zapatoca,129,0.3
+70,Sucre,70001,Sincelejo,"3,110",42.6
+70,Sucre,70110,Buenavista,105,1.4
+70,Sucre,70124,Caimito,75,1
+70,Sucre,70204,Colosó,36,0.5
+70,Sucre,70215,Corozal,451,6.2
+70,Sucre,70221,Coveñas,178,2.4
+70,Sucre,70230,Chalán,26,0.4
+70,Sucre,70233,El Roble,50,0.7
+70,Sucre,70235,Galeras,128,1.8
+70,Sucre,70265,Guaranda,127,1.7
+70,Sucre,70400,La Unión,69,0.9
+70,Sucre,70418,Los Palmitos,126,1.7
+70,Sucre,70429,Majagual,214,2.9
+70,Sucre,70473,Morroa,86,1.2
+70,Sucre,70508,Ovejas,170,2.3
+70,Sucre,70523,Palmito,79,1.1
+70,Sucre,70670,Sampués,202,2.8
+70,Sucre,70678,San Benito Abad,148,2
+70,Sucre,70702,San Juan de Betulia,95,1.3
+70,Sucre,70708,San Marcos,369,5.1
+70,Sucre,70713,San Onofre,269,3.7
+70,Sucre,70717,San Pedro,124,1.7
+70,Sucre,70742,San Luis de Sincé,181,2.5
+70,Sucre,70771,Sucre,128,1.8
+70,Sucre,70820,Santiago de Tolú,252,3.4
+70,Sucre,70823,Tolú Viejo,501,6.9
+73,Tolima,73001,Ibagué,"7,947",42.9
+73,Tolima,73024,Alpujarra,85,0.5
+73,Tolima,73026,Alvarado,121,0.7
+73,Tolima,73030,Ambalema,88,0.5
+73,Tolima,73043,Anzoátegui,135,0.7
+73,Tolima,73055,Armero,148,0.8
+73,Tolima,73067,Ataco,240,1.3
+73,Tolima,73124,Cajamarca,167,0.9
+73,Tolima,73148,Carmen de Apicalá,96,0.5
+73,Tolima,73152,Casabianca,92,0.5
+73,Tolima,73168,Chaparral,469,2.5
+73,Tolima,73200,Coello,252,1.4
+73,Tolima,73217,Coyaima,195,1.1
+73,Tolima,73226,Cunday,93,0.5
+73,Tolima,73236,Dolores,74,0.4
+73,Tolima,73268,Espinal,"1,814",9.8
+73,Tolima,73270,Falan,88,0.5
+73,Tolima,73275,Flandes,266,1.4
+73,Tolima,73283,Fresno,424,2.3
+73,Tolima,73319,Guamo,370,2
+73,Tolima,73347,Herveo,85,0.5
+73,Tolima,73349,Honda,211,1.1
+73,Tolima,73352,Icononzo,95,0.5
+73,Tolima,73408,Lérida,243,1.3
+73,Tolima,73411,Líbano,363,2
+73,Tolima,73443,San Sebastián de Mariquita,443,2.4
+73,Tolima,73449,Melgar,748,4
+73,Tolima,73461,Murillo,48,0.3
+73,Tolima,73483,Natagaima,128,0.7
+73,Tolima,73504,Ortega,336,1.8
+73,Tolima,73520,Palocabildo,83,0.4
+73,Tolima,73547,Piedras,183,1
+73,Tolima,73555,Planadas,276,1.5
+73,Tolima,73563,Prado,120,0.6
+73,Tolima,73585,Purificación,458,2.5
+73,Tolima,73616,Rioblanco,204,1.1
+73,Tolima,73622,Roncesvalles,92,0.5
+73,Tolima,73624,Rovira,185,1
+73,Tolima,73671,Saldaña,190,1
+73,Tolima,73675,San Antonio,115,0.6
+73,Tolima,73678,San Luis,136,0.7
+73,Tolima,73686,Santa Isabel,91,0.5
+73,Tolima,73770,Suárez,40,0.2
+73,Tolima,73854,Valle de San Juan,87,0.5
+73,Tolima,73861,Venadillo,266,1.4
+73,Tolima,73870,Villahermosa,96,0.5
+73,Tolima,73873,Villarrica,57,0.3
+76,Valle Del Cauca,76001,Cali,"38,547",47.6
+76,Valle Del Cauca,76020,Alcalá,230,0.3
+76,Valle Del Cauca,76036,Andalucía,273,0.3
+76,Valle Del Cauca,76041,Ansermanuevo,255,0.3
+76,Valle Del Cauca,76054,Argelia,71,0.1
+76,Valle Del Cauca,76100,Bolívar,166,0.2
+76,Valle Del Cauca,76109,Buenaventura,"4,279",5.3
+76,Valle Del Cauca,76111,Guadalajara de Buga,"2,807",3.5
+76,Valle Del Cauca,76113,Bugalagrande,955,1.2
+76,Valle Del Cauca,76122,Caicedonia,586,0.7
+76,Valle Del Cauca,76126,Calima,219,0.3
+76,Valle Del Cauca,76130,Candelaria,"2,293",2.8
+76,Valle Del Cauca,76147,Cartago,"2,037",2.5
+76,Valle Del Cauca,76233,Dagua,576,0.7
+76,Valle Del Cauca,76243,El Águila,145,0.2
+76,Valle Del Cauca,76246,El Cairo,115,0.1
+76,Valle Del Cauca,76248,El Cerrito,"1,049",1.3
+76,Valle Del Cauca,76250,El Dovio,126,0.2
+76,Valle Del Cauca,76275,Florida,630,0.8
+76,Valle Del Cauca,76306,Ginebra,359,0.4
+76,Valle Del Cauca,76318,Guacarí,481,0.6
+76,Valle Del Cauca,76364,Jamundí,"1,986",2.5
+76,Valle Del Cauca,76377,La Cumbre,142,0.2
+76,Valle Del Cauca,76400,La Unión,420,0.5
+76,Valle Del Cauca,76403,La Victoria,156,0.2
+76,Valle Del Cauca,76497,Obando,247,0.3
+76,Valle Del Cauca,76520,Palmira,"5,657",7
+76,Valle Del Cauca,76563,Pradera,750,0.9
+76,Valle Del Cauca,76606,Restrepo,347,0.4
+76,Valle Del Cauca,76616,Riofrío,341,0.4
+76,Valle Del Cauca,76622,Roldanillo,425,0.5
+76,Valle Del Cauca,76670,San Pedro,390,0.5
+76,Valle Del Cauca,76736,Sevilla,557,0.7
+76,Valle Del Cauca,76823,Toro,185,0.2
+76,Valle Del Cauca,76828,Trujillo,229,0.3
+76,Valle Del Cauca,76834,Tuluá,"3,242",4
+76,Valle Del Cauca,76845,Ulloa,78,0.1
+76,Valle Del Cauca,76863,Versalles,89,0.1
+76,Valle Del Cauca,76869,Vijes,188,0.2
+76,Valle Del Cauca,76890,Yotoco,348,0.4
+76,Valle Del Cauca,76892,Yumbo,"8,017",9.9
+76,Valle Del Cauca,76895,Zarzal,992,1.2
+81,Arauca,81001,Arauca,"1,832",43.3
+81,Arauca,81065,Arauquita,750,17.7
+81,Arauca,81220,Cravo Norte,38,0.9
+81,Arauca,81300,Fortul,210,5
+81,Arauca,81591,Puerto Rondón,58,1.4
+81,Arauca,81736,Saravena,472,11.2
+81,Arauca,81794,Tame,868,20.5
+85,Casanare,85001,Yopal,"4,435",34.9
+85,Casanare,85010,Aguazul,"1,762",13.9
+85,Casanare,85015,Chámeza,33,0.3
+85,Casanare,85125,Hato Corozal,208,1.6
+85,Casanare,85136,La Salina,15,0.1
+85,Casanare,85139,Maní,554,4.4
+85,Casanare,85162,Monterrey,206,1.6
+85,Casanare,85225,Nunchía,206,1.6
+85,Casanare,85230,Orocué,710,5.6
+85,Casanare,85250,Paz de Ariporo,712,5.6
+85,Casanare,85263,Pore,149,1.2
+85,Casanare,85279,Recetor,40,0.3
+85,Casanare,85300,Sabanalarga,49,0.4
+85,Casanare,85315,Sácama,22,0.2
+85,Casanare,85325,San Luis de Palenque,468,3.7
+85,Casanare,85400,Támara,91,0.7
+85,Casanare,85410,Tauramena,"1,905",15
+85,Casanare,85430,Trinidad,384,3
+85,Casanare,85440,Villanueva,750,5.9
+86,Putumayo,86001,Mocoa,634,18.4
+86,Putumayo,86219,Colón,31,0.9
+86,Putumayo,86320,Orito,484,14
+86,Putumayo,86568,Puerto Asís,874,25.4
+86,Putumayo,86569,Puerto Caicedo,76,2.2
+86,Putumayo,86571,Puerto Guzmán,150,4.3
+86,Putumayo,86573,Puerto Leguízamo,129,3.8
+86,Putumayo,86749,Sibundoy,84,2.4
+86,Putumayo,86755,San Francisco,31,0.9
+86,Putumayo,86757,San Miguel,174,5
+86,Putumayo,86760,Santiago,56,1.6
+86,Putumayo,86865,Valle del Guamuez,228,6.6
+86,Putumayo,86885,Villagarzón,496,14.4
+88,"San Andrés, Providencia y Santa Catalina (Archipiélago)",88001,San Andrés,"1,207",92.3
+88,"San Andrés, Providencia y Santa Catalina (Archipiélago)",88564,Providencia,101,7.7
+91,Amazonas,91001,Leticia,527,78.4
+91,Amazonas,91263,El Encanto,12,1.8
+91,Amazonas,91405,La Chorrera,10,1.4
+91,Amazonas,91407,La Pedrera,14,2.1
+91,Amazonas,91430,La Victoria,3,0.4
+91,Amazonas,91460,Mirití - Paraná,4,0.6
+91,Amazonas,91530,Puerto Alegría,6,0.8
+91,Amazonas,91536,Puerto Arica,4,0.6
+91,Amazonas,91540,Puerto Nariño,71,10.5
+91,Amazonas,91669,Puerto Santander,9,1.3
+91,Amazonas,91798,Tarapacá,13,2
+94,Guainía,94001,Inírida,249,77
+94,Guainía,94343,Barranco Minas,23,7.2
+94,Guainía,94663,Mapiripana,7,2.2
+94,Guainía,94883,San Felipe,8,2.5
+94,Guainía,94884,Puerto Colombia,12,3.7
+94,Guainía,94885,La Guadalupe,1,0.3
+94,Guainía,94886,Cacahual,9,2.9
+94,Guainía,94887,Pana Pana,8,2.5
+94,Guainía,94888,Morichal,5,1.5
+95,Guaviare,95001,San José del Guaviare,496,67.6
+95,Guaviare,95015,Calamar,58,7.8
+95,Guaviare,95025,El Retorno,131,17.8
+95,Guaviare,95200,Miraflores,50,6.8
+97,Vaupés,97001,Mitú,205,79.7
+97,Vaupés,97161,Carurú,22,8.8
+97,Vaupés,97511,Pacoa,15,5.7
+97,Vaupés,97666,Taraira,10,3.9
+97,Vaupés,97777,Papunahua,2,0.8
+97,Vaupés,97889,Yavaraté,3,1.2
+99,Vichada,99001,Puerto Carreño,114,19.4
+99,Vichada,99524,La Primavera,91,15.5
+99,Vichada,99624,Santa Rosalía,42,7.2
+99,Vichada,99773,Cumaribo,340,57.8

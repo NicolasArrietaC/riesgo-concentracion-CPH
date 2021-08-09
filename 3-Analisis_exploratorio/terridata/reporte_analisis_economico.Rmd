@@ -1,0 +1,54 @@
+---
+title: "Análsis de dimensión económica territorial en Colombia"
+author: "Nicolas Arrieta"
+date: "7/7/2021"
+output:
+  html_document: 
+    code_folding: hide
+    theme: flatly
+    toc: yes
+    toc_depth: 2
+editor_options: 
+  chunk_output_type: console
+---
+
+# Conjunto de datos y librerias
+
+```{r, message = FALSE}
+# Librerias
+sapply(
+ c('tidyverse', 'skimr', 'reshape2'), 
+ require, character.only = T
+)
+
+knitr::opts_chunk$set(message = F, 
+                      warning = F, 
+                      fig.align = "center")
+
+# Carga de datos
+direccion <- paste0('C:/Users/nico2/Analytica Projects/contratacion_publica/',
+                    'riesgo-concentracion-CPH/1-2-Datasets_complementarios/')
+
+ind_econ <- read_csv(paste0(direccion, "terridata_economia.csv.gz"),
+ locale = locale(encoding = "UTF-8"))
+```
+
+Ajuste de los nombres de las variables
+
+```{r}
+names(ind_econ) <- c("codigo_departamento", "departamento",
+                       "codigo_entidad", "entidad", 
+                       "dimension", "subcategoria", 
+                       "indicador", "valor", 
+                       "dato_cualitativo", "anno",
+                       "mes", "fuente", "und_medida")
+```
+
+# Selección de variables y dimension de tiempo
+
+```{r}
+ind_econ <- ind_econ |> 
+ filter(anno <= 2019 & anno >= 2014)
+```
+
+

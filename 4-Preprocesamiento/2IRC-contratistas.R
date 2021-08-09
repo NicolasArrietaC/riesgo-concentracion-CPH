@@ -22,7 +22,7 @@ act_contratistas <- read_csv(paste0(direccion, 'actividad_contratistas.csv'),
 # 3. Conjunto de datos base ----
 # parámetros
 # Número de contratos mínimos
-cont_min <- 2 # Por lo menos dos contratos entre los 6 años
+cont_min <- 3 # Por lo menos dos contratos entre los 6 años
 rel_min <- 2 # relación minima con entidades
 
 # Consulta

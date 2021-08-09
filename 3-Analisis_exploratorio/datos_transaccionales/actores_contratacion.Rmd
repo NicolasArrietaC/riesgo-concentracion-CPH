@@ -34,8 +34,8 @@ sapply(
 knitr::opts_chunk$set(message = F, warning = F, fig.align = "center")
 
 # Carga de datos
-direccion <- paste0('C:/Users/nico2/Proyectos/contratacion_publica/',
-                    'riesgo-concentracion-CPH/1-2-Datasets_complementarios/')
+direccion <- paste0('C:/Users/nico2/Analytica Projects/contratacion_publica',
+                    '/riesgo-concentracion-CPH/1-2-Datasets_complementarios/')
 # Conjunto de datos SECOP
 contratos <- read_csv(paste0(direccion, 'secop_i_ips.csv.gz'),
                       locale = locale(encoding = 'UTF-8'))
